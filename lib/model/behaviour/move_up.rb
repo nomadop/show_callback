@@ -1,16 +1,20 @@
-class MoveUp < Behaviour::Base
+class MoveUp < SimpleMovement
   DEFAULT_SPEED = 5
 
-  def initialize(speed = DEFAULT_SPEED)
-    super()
-    @speed = speed
+  def initialize(distance = World::WORLD_HEIGHT, speed = DEFAULT_SPEED)
+    super
   end
 
   def update
-    @sprite.center_y -= [@speed, @sprite.center_y - @sprite.half_height].min
+    super
+    @sprite.center_y -= move
+  end
+
+  def move
+    [@speed, @sprite.center_y - @sprite.half_height].min
   end
 
   def finish?
-    @sprite.center_y <= @sprite.half_height
+    super || @sprite.center_y <= @sprite.half_height
   end
 end

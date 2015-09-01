@@ -1,28 +1,29 @@
 class ShowcaseScene < Scene::Base
   def initialize
     super
-    @cases = []
+    @case_builders = []
   end
 
   def start
     @case_index = 0
-    showcase(@case_index)
+    showcase
   end
 
-  def add_case(sprites = [])
-    sprites << yield if block_given?
-    @cases << {sprites: sprites}
+  def add_case(&block)
+    @case_builders << block
     self
   end
 
   def next_case
     @case_index += 1
-    @case_index < @cases.size? ? showcase(@case_index) : finish!
+    @case_index = 0 unless @case_index < @case_builders.size
+    showcase
   end
 
-  def showcase(index)
+  def showcase
     @sprites.clear
-    @sprites = @cases.at(index)[:sprites]
+    builder = @case_builders.at(@case_index)
+    @sprites += Array(builder.call)
   end
 
   keybind(Gosu::KbSpace) do

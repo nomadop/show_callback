@@ -1,16 +1,20 @@
-class MoveLeft < Behaviour::Base
+class MoveLeft < SimpleMovement
   DEFAULT_SPEED = 5
 
-  def initialize(speed = DEFAULT_SPEED)
-    super()
-    @speed = speed
+  def initialize(distance = World::WORLD_WIDTH, speed = DEFAULT_SPEED)
+    super
   end
 
   def update
-    @sprite.center_x -= [@speed, @sprite.center_x - @sprite.half_width].min
+    super
+    @sprite.center_x -= move
+  end
+
+  def move
+    [@speed, @sprite.center_x - @sprite.half_width].min
   end
 
   def finish?
-    @sprite.center_x <= @sprite.half_width
+    super || @sprite.center_x <= @sprite.half_width
   end
 end

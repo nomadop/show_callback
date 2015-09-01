@@ -24,8 +24,7 @@ class World
     @window = WorldWindow.new(WORLD_WIDTH, WORLD_HEIGHT)
     start_scene ||= Scene::Base.new
     @scenes = [start_scene]
-    @scene_index = 0
-    change_scene(0)
+    change_scene(start_scene)
   end
 
   def add_scene(scene)
@@ -33,8 +32,8 @@ class World
   end
 
   def next_scene
-    @scene_index += 1
-    @scene_index < @scenes.size ? change_scene(@scene_index) : close
+    scene = @scenes.first
+    scene.nil? ? close : change_scene(scene)
   end
 
   def show
@@ -46,9 +45,10 @@ class World
     @window.close
   end
 
-  def change_scene(index)
-    @scene = @scenes[index]
+  def change_scene(scene)
+    @scene = scene
     @window.scene = @scene
+    @scenes.delete(scene)
     @scene.start
   end
 

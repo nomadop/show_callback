@@ -7,7 +7,6 @@ class Callback
     def next_behaviour(_next_behaviour)
       new(_next_behaviour) do |behaviour, next_behaviour|
         sprite = behaviour.sprite
-        sprite.remove_behaviour(behaviour)
         sprite.add_behaviour(next_behaviour)
       end
     end
@@ -24,6 +23,9 @@ class Callback
 
   def call(behaviour)
     @proc.call(behaviour, *@args)
-    behaviour.remove_callback(self)
+  end
+
+  def to_s
+    @proc.to_s
   end
 end

@@ -1,6 +1,6 @@
 class ControlScene < Scene::Base
   def start
-    @control_sprite = Ball.new(320, 240, 50, Color::GREEN)
+    @control_sprite = Ball.new(320, 240, 50, Color::WHITE)
     @control_sprite.extend(GoStraight)
     add_sprite(@control_sprite)
   end

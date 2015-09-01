@@ -1,6 +1,7 @@
 module Behaviour
   class Base
     attr_reader :sprite
+    attr_reader :callbacks
 
     def initialize(*callbacks)
       @callbacks = []
@@ -15,8 +16,8 @@ module Behaviour
       @sprite = sprite
     end
 
-    def add_callback(callback, &block)
-      @callbacks << (block_given? ? block.to_proc : callback)
+    def add_callback(callback)
+      @callbacks << callback
       self
     end
 
@@ -29,6 +30,10 @@ module Behaviour
       @callbacks.each do |callback|
         callback.call(self)
       end
+    end
+
+    def to_s
+      "Behaviour #{self.class.name}: #{super}"
     end
   end
 end

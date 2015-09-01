@@ -18,7 +18,7 @@ module Sprite
         behaviour.update
         if behaviour.finish?
           behaviour.callback
-          # remove_behaviour(behaviour)
+          remove_behaviour(behaviour)
         end
       end
     end
