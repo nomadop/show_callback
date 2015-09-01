@@ -18,10 +18,7 @@ module Sprite
         next if behaviour.inactive?
 
         behaviour.update
-        if behaviour.finish?
-          behaviour.callback
-          behaviour.finish!
-        end
+        behaviour.callback if behaviour.finish?
       end
 
       @behaviours.delete_if { |behaviour| behaviour.active? && behaviour.finish? }

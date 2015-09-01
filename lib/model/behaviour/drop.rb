@@ -16,6 +16,6 @@ class Drop < Behaviour::Base
   end
 
   def finish?
-    super || @sprite.center_y >= World::WORLD_HEIGHT
+    @sprite.center_y >= World::WORLD_HEIGHT
   end
 end
