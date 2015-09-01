@@ -29,9 +29,9 @@ showcase_scene.add_case do
 end
 
 World
-  .add_scene(control_scene)
-  .add_scene(rain_scene)
   .add_scene(showcase_scene)
+  # .add_scene(control_scene)
+  # .add_scene(rain_scene)
 World.next_scene
 
 World.show

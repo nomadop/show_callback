@@ -15,7 +15,7 @@ class SimpleMovement < Behaviour::Base
   end
 
   def finish?
-    @moved >= @distance
+    super || @moved >= @distance
   end
 
   def reset_movement_after_finish

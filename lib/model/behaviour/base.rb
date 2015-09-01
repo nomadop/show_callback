@@ -6,10 +6,28 @@ module Behaviour
     def initialize(*callbacks)
       @callbacks = []
       @callbacks += callbacks
+      @active = false
+      @finish = false
+    end
+
+    def active?
+      @active
+    end
+
+    def inactive?
+      !@active
+    end
+
+    def active!
+      @active = true
     end
 
     def finish?
-      false
+      @finish
+    end
+
+    def finish!
+      @finish = true
     end
 
     def attach_sprite(sprite)

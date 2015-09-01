@@ -15,12 +15,18 @@ module Sprite
 
     def update
       @behaviours.each do |behaviour|
+        next if behaviour.inactive?
+
         behaviour.update
         if behaviour.finish?
           behaviour.callback
-          remove_behaviour(behaviour)
+          behaviour.finish!
         end
       end
+
+      @behaviours.delete_if { |behaviour| behaviour.active? && behaviour.finish? }
+      @behaviours.select(&:inactive?).each(&:active!)
+      true
     end
 
     def add_behaviour(behaviour)
