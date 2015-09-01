@@ -21,17 +21,17 @@ showcase_scene.add_case do
   sprite = Ball.new(padding, padding, 50, Color::GREEN)
   behaviour_chain = Chain.new(sprite)
   behaviour_chain
-    .add_behaviour(MoveDown.new(World::WORLD_HEIGHT - padding * 2).reset_movement_after_finish)
-    .add_behaviour(MoveRight.new(World::WORLD_WIDTH - padding * 2).reset_movement_after_finish)
-    .add_behaviour(MoveUp.new(World::WORLD_HEIGHT - padding * 2).reset_movement_after_finish)
-    .add_behaviour(MoveLeft.new(World::WORLD_WIDTH - padding * 2).reset_movement_after_finish)
+    .add_behaviour {MoveDown.new(World::WORLD_HEIGHT - padding * 2).reset_movement_after_finish}
+    .add_behaviour {MoveRight.new(World::WORLD_WIDTH - padding * 2).reset_movement_after_finish}
+    .add_behaviour {MoveUp.new(World::WORLD_HEIGHT - padding * 2).reset_movement_after_finish}
+    .add_behaviour {MoveLeft.new(World::WORLD_WIDTH - padding * 2).reset_movement_after_finish}
     .loop!
 end
 
 World
+  .add_scene(control_scene)
+  .add_scene(rain_scene)
   .add_scene(showcase_scene)
-  # .add_scene(control_scene)
-  # .add_scene(rain_scene)
 World.next_scene
 
 World.show

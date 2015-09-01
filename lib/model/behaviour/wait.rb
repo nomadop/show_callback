@@ -9,6 +9,6 @@ class Wait < Behaviour::Base
   end
 
   def finish?
-    !@first_call_at.nil? && Time.now - @first_call_at > @timeout ? true : false
+    super || !@first_call_at.nil? && Time.now - @first_call_at > @timeout ? true : false
   end
 end

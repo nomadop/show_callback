@@ -6,6 +6,7 @@ class Callback
 
     def next_behaviour(_sprite, _next_behaviour)
       new(_sprite, _next_behaviour) do |sprite, next_behaviour|
+        next_behaviour = next_behaviour.build if next_behaviour.is_a?(Behaviour::Builder)
         sprite.add_behaviour(next_behaviour)
       end
     end

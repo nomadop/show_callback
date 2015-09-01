@@ -34,6 +34,6 @@ class MoveTo < Behaviour::Base
   end
 
   def finish?
-    (@sprite.center_x - @target_x).abs < speed_x.abs && (@sprite.center_y - @target_y).abs < speed_y.abs
+    super || (@sprite.center_x - @target_x).abs < speed_x.abs && (@sprite.center_y - @target_y).abs < speed_y.abs
   end
 end

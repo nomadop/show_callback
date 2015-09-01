@@ -18,7 +18,7 @@ class Bouncing < Behaviour::Base
   end
 
   def finish?
-    @sprite.center_y + @sprite.half_height >= World::WORLD_HEIGHT
+    super || @sprite.center_y + @sprite.half_height >= World::WORLD_HEIGHT
   end
 
   def bouncing_after_reach_ground

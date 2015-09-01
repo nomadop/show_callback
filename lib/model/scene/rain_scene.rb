@@ -32,8 +32,8 @@ class RainScene < Scene::Base
     add_sprite(sun)
     behaviours_chain = Chain.new(sun)
     behaviours_chain
-        .add_behaviour(Wait.new(1))
-        .add_behaviour(MoveTo.new(150, 100, 5))
+        .add_behaviour { Wait.new(1) }
+        .add_behaviour { MoveTo.new(150, 100, 5) }
         .end!
   end
 

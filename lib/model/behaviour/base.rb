@@ -7,6 +7,7 @@ module Behaviour
       @callbacks = []
       @callbacks += callbacks
       @active = false
+      @finish = false
     end
 
     def active?
@@ -22,7 +23,11 @@ module Behaviour
     end
 
     def finish?
-      false
+      @finish
+    end
+
+    def finish!
+      @finish = true
     end
 
     def attach_sprite(sprite)

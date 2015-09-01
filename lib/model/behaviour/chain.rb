@@ -1,29 +1,38 @@
 class Chain
-  attr_reader :behaviours
+  attr_reader :behaviour_builders
 
   def initialize(sprite)
     @sprite = sprite
-    @behaviours = []
+    @behaviour_builders = []
   end
 
-  def add_behaviour(behaviour)
-    link_behaviour(behaviour)
+  def add_behaviour(&block)
+    behaviour_builder = Behaviour::Builder.new(&block)
+    link_behaviour(behaviour_builder)
 
-    @behaviours << behaviour
+    @behaviour_builders << behaviour_builder
     self
   end
 
-  def link_behaviour(behaviour)
-    last_behaviour = @behaviours.last
-    last_behaviour.add_callback(Callback.next_behaviour(@sprite, behaviour)) unless last_behaviour.nil?
+  def link_behaviour(behaviour_builder)
+    return if @behaviour_builders.empty?
+
+    last_builder = @behaviour_builders.last
+    last_builder.after_build do |behaviour|
+      behaviour.add_callback(Callback.next_behaviour(@sprite, behaviour_builder))
+    end
   end
 
   def first_behaviour
-    @behaviours.first
+    first_builder.build
+  end
+
+  def first_builder
+    @behaviour_builders.first
   end
 
   def loop!
-    link_behaviour(first_behaviour)
+    link_behaviour(first_builder)
     attach_sprite
   end
 
