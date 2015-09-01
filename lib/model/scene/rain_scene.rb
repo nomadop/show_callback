@@ -2,9 +2,8 @@ class RainScene < Scene::Base
   attr_accessor :ground_y
   attr_accessor :rain_remains
 
-  def initialize(ground_y = World::WORLD_HEIGHT - 50, rain_remains = 100, raining_rate = 0.2)
+  def initialize(rain_remains = 100, raining_rate = 0.2)
     super()
-    @ground_y = ground_y
     @rain_remains = rain_remains
     @raining_rate = raining_rate
   end
@@ -31,12 +30,11 @@ class RainScene < Scene::Base
   def sun_raise
     sun = Sun.new
     add_sprite(sun)
-    behaviours_chain = Chain.new
+    behaviours_chain = Chain.new(sun)
     behaviours_chain
         .add_behaviour(Wait.new(1))
         .add_behaviour(MoveTo.new(150, 100, 5))
-
-    sun.add_behaviour(behaviours_chain.first_behaviour)
+        .end!
   end
 
   def rain_remain?

@@ -3,7 +3,11 @@ class Drop < Behaviour::Base
     super
     @speed = 0
     @acc = 1
-    add_callback(Callback.disappear)
+  end
+
+  def attach_sprite(sprite)
+    super
+    add_callback(Callback.disappear(sprite))
   end
 
   def update
@@ -12,6 +16,6 @@ class Drop < Behaviour::Base
   end
 
   def finish?
-    @sprite.center_y >= World.world.scene.ground_y
+    @sprite.center_y >= World::WORLD_HEIGHT
   end
 end

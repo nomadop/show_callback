@@ -23,7 +23,7 @@ class SimpleMovement < Behaviour::Base
   end
 
   def reset_movement_callback
-    Callback.new do |behaviour|
+    Callback.new(self) do |behaviour|
       behaviour.moved = 0
       # puts "callbacks: #{behaviour.callbacks.map(&:to_s)}"
       # puts "current: #{self}"

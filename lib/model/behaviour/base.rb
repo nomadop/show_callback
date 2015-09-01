@@ -28,7 +28,7 @@ module Behaviour
 
     def callback
       @callbacks.each do |callback|
-        callback.call(self)
+        callback.call
       end
     end
 

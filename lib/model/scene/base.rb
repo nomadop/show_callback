@@ -2,6 +2,7 @@ module Scene
   class Base
     class << self
       def keybind(kid, &block)
+        $keybinds << kid unless $keybinds.include?(kid)
         define_method("key#{kid}_pressed", &block)
       end
     end
@@ -46,7 +47,7 @@ module Scene
     def method_missing(*args)
       method = args[0]
       if method =~ /key\d+_pressed/
-        puts "Unbind key!"
+        puts "This key is not bind in the current scene!"
       else
         super
       end

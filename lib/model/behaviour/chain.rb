@@ -1,7 +1,8 @@
 class Chain
   attr_reader :behaviours
 
-  def initialize
+  def initialize(sprite)
+    @sprite = sprite
     @behaviours = []
   end
 
@@ -14,7 +15,7 @@ class Chain
 
   def link_behaviour(behaviour)
     last_behaviour = @behaviours.last
-    last_behaviour.add_callback(Callback.next_behaviour(behaviour)) unless last_behaviour.nil?
+    last_behaviour.add_callback(Callback.next_behaviour(@sprite, behaviour)) unless last_behaviour.nil?
   end
 
   def first_behaviour
@@ -23,5 +24,14 @@ class Chain
 
   def loop!
     link_behaviour(first_behaviour)
+    attach_sprite
+  end
+
+  def end!
+    attach_sprite
+  end
+
+  def attach_sprite
+    @sprite.add_behaviour(first_behaviour)
   end
 end

@@ -5,7 +5,10 @@ class Bouncing < Behaviour::Base
     @bouncing_rate = bouncing_rate
     @speed = @init_speed
     @acc = 1
+  end
 
+  def attach_sprite(sprite)
+    super
     bouncing_after_reach_ground
   end
 
@@ -26,8 +29,8 @@ class Bouncing < Behaviour::Base
   end
 
   def bouncing_callback(new_init_speed)
-    Callback.new(new_init_speed, @bouncing_rate) do |behaviour, init_speed, bouncing_rate|
-      behaviour.sprite.add_behaviour(Bouncing.new(init_speed, bouncing_rate))
+    Callback.new(@sprite, new_init_speed, @bouncing_rate) do |sprite, init_speed, bouncing_rate|
+      sprite.add_behaviour(Bouncing.new(init_speed, bouncing_rate))
     end
   end
 end

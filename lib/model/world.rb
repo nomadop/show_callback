@@ -29,6 +29,7 @@ class World
 
   def add_scene(scene)
     @scenes << scene
+    self
   end
 
   def next_scene
