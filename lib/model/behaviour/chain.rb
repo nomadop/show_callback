@@ -1,8 +1,8 @@
 class Chain
   attr_reader :behaviour_builders
 
-  def initialize(sprite)
-    @sprite = sprite
+  def initialize(spirit)
+    @spirit = spirit
     @behaviour_builders = []
   end
 
@@ -19,7 +19,7 @@ class Chain
 
     last_builder = @behaviour_builders.last
     last_builder.after_build do |behaviour|
-      behaviour.add_callback(Callback.next_behaviour(@sprite, behaviour_builder))
+      behaviour.add_callback(Callback.next_behaviour(@spirit, behaviour_builder))
     end
   end
 
@@ -33,14 +33,14 @@ class Chain
 
   def loop!
     link_behaviour(first_builder)
-    attach_sprite
+    attach_spirit
   end
 
   def end!
-    attach_sprite
+    attach_spirit
   end
 
-  def attach_sprite
-    @sprite.add_behaviour(first_behaviour)
+  def attach_spirit
+    @spirit.add_behaviour(first_behaviour)
   end
 end

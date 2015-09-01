@@ -7,14 +7,14 @@ class MoveUp < SimpleMovement
 
   def update
     super
-    @sprite.center_y -= move
+    @spirit.center_y -= move
   end
 
   def move
-    [@speed, @sprite.center_y - @sprite.half_height].min
+    [@speed, @spirit.center_y - @spirit.half_height].min
   end
 
   def finish?
-    super || @sprite.center_y <= @sprite.half_height
+    super || @spirit.center_y <= @spirit.half_height
   end
 end

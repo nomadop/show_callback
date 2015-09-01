@@ -10,7 +10,7 @@ module Behaviour
 
     def build
       behaviour = @builder.call
-      @after_build.call(behaviour)
+      @after_build.call(behaviour) unless @after_build.nil?
       behaviour
     end
   end

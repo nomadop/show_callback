@@ -1,6 +1,6 @@
 module Behaviour
   class Base
-    attr_reader :sprite
+    attr_reader :spirit
     attr_reader :callbacks
 
     def initialize(*callbacks)
@@ -30,8 +30,8 @@ module Behaviour
       @finish = true
     end
 
-    def attach_sprite(sprite)
-      @sprite = sprite
+    def attach_spirit(spirit)
+      @spirit = spirit
     end
 
     def add_callback(callback)

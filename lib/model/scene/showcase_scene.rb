@@ -21,9 +21,9 @@ class ShowcaseScene < Scene::Base
   end
 
   def showcase
-    @sprites.clear
+    @spirits.clear
     builder = @case_builders.at(@case_index)
-    @sprites += Array(builder.call)
+    @spirits += Array(builder.call)
   end
 
   keybind(Gosu::KbSpace) do

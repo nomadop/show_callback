@@ -17,16 +17,4 @@ class SimpleMovement < Behaviour::Base
   def finish?
     super || @moved >= @distance
   end
-
-  def reset_movement_after_finish
-    add_callback(reset_movement_callback)
-  end
-
-  def reset_movement_callback
-    Callback.new(self) do |behaviour|
-      behaviour.moved = 0
-      # puts "callbacks: #{behaviour.callbacks.map(&:to_s)}"
-      # puts "current: #{self}"
-    end
-  end
 end

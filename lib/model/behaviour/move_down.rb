@@ -6,14 +6,14 @@ class MoveDown < SimpleMovement
 
   def update
     super
-    @sprite.center_y += move
+    @spirit.center_y += move
   end
 
   def move
-    [@speed, World::WORLD_HEIGHT - @sprite.half_height - @sprite.center_y].min
+    [@speed, World::WORLD_HEIGHT - @spirit.half_height - @spirit.center_y].min
   end
 
   def finish?
-    super || @sprite.center_y + @sprite.half_height >= World::WORLD_HEIGHT
+    super || @spirit.center_y + @spirit.half_height >= World::WORLD_HEIGHT
   end
 end

@@ -1,4 +1,4 @@
-class Ball < Sprite::Base
+class Ball < Spirit::Base
 
   def initialize(center_x, center_y, radius, color)
     super(World.create_image(Circle.create(radius, color)))

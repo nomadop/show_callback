@@ -7,24 +7,24 @@ require_all './'
 World.world = World.new()
 $keybinds.each { |kid| World.window.register_keybind(kid) }
 
-rain_scene = RainScene.new(500, 0.9)
+rain_scene = RainScene.new(10, 0.9)
 control_scene = ControlScene.new
 showcase_scene = ShowcaseScene.new
 
 showcase_scene.add_case do
-  sprite = Ball.new(320, World::WORLD_HEIGHT - 51, 50, Color::BLUE)
-  sprite.add_behaviour(Bouncing.new(-30))
+  spirit = Ball.new(320, World::WORLD_HEIGHT - 50, 50, Color::BLUE)
+  spirit.add_behaviour(Bouncing.new(-30))
 end
 
 showcase_scene.add_case do
   padding = 150
-  sprite = Ball.new(padding, padding, 50, Color::GREEN)
-  behaviour_chain = Chain.new(sprite)
+  spirit = Ball.new(padding, padding, 50, Color::GREEN)
+  behaviour_chain = Chain.new(spirit)
   behaviour_chain
-    .add_behaviour {MoveDown.new(World::WORLD_HEIGHT - padding * 2).reset_movement_after_finish}
-    .add_behaviour {MoveRight.new(World::WORLD_WIDTH - padding * 2).reset_movement_after_finish}
-    .add_behaviour {MoveUp.new(World::WORLD_HEIGHT - padding * 2).reset_movement_after_finish}
-    .add_behaviour {MoveLeft.new(World::WORLD_WIDTH - padding * 2).reset_movement_after_finish}
+    .add_behaviour { MoveDown.new(World::WORLD_HEIGHT - padding * 2) }
+    .add_behaviour { MoveRight.new(World::WORLD_WIDTH - padding * 2) }
+    .add_behaviour { MoveUp.new(World::WORLD_HEIGHT - padding * 2) }
+    .add_behaviour { MoveLeft.new(World::WORLD_WIDTH - padding * 2) }
     .loop!
 end
 

@@ -16,12 +16,12 @@ class RainScene < Scene::Base
   def update
     super
     create_new_rain if rand < @raining_rate
-    finish! if !rain_remain? && @sprites.empty?
+    finish! if !rain_remain? && @spirits.empty?
   end
 
   def create_new_rain
     if rain_remain?
-      add_sprite(Rain.new)
+      add_spirit(Rain.new)
       @rain_remains -= 1
       sun_raise if @rain_remains == 0
     end
@@ -29,7 +29,7 @@ class RainScene < Scene::Base
 
   def sun_raise
     sun = Sun.new
-    add_sprite(sun)
+    add_spirit(sun)
     behaviours_chain = Chain.new(sun)
     behaviours_chain
         .add_behaviour { Wait.new(1) }

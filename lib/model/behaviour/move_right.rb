@@ -7,14 +7,14 @@ class MoveRight < SimpleMovement
 
   def update
     super
-    @sprite.center_x += move
+    @spirit.center_x += move
   end
 
   def move
-    [@speed, World::WORLD_WIDTH - @sprite.half_width - @sprite.center_x].min
+    [@speed, World::WORLD_WIDTH - @spirit.half_width - @spirit.center_x].min
   end
 
   def finish?
-    super || @sprite.center_x + @sprite.half_width >= World::WORLD_WIDTH
+    super || @spirit.center_x + @spirit.half_width >= World::WORLD_WIDTH
   end
 end

@@ -6,10 +6,10 @@ module Scene
         define_method("key#{kid}_pressed", &block)
       end
     end
-    attr_accessor :sprites
+    attr_accessor :spirits
 
     def initialize
-      @sprites = []
+      @spirits = []
       @finished = false
     end
 
@@ -21,21 +21,21 @@ module Scene
       @finished
     end
 
-    def add_sprite(sprite)
-      @sprites << sprite
+    def add_spirit(spirit)
+      @spirits << spirit
     end
 
-    def remove_sprite(sprite)
-      @sprites.delete(sprite)
+    def remove_spirit(spirit)
+      @spirits.delete(spirit)
     end
 
     def update
-      @sprites.each(&:update)
+      @spirits.each(&:update)
       World.next_scene if finish?
     end
 
     def draw
-      @sprites.each(&:draw)
+      @spirits.each(&:draw)
     end
 
     def start; end

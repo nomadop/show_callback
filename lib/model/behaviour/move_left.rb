@@ -7,14 +7,14 @@ class MoveLeft < SimpleMovement
 
   def update
     super
-    @sprite.center_x -= move
+    @spirit.center_x -= move
   end
 
   def move
-    [@speed, @sprite.center_x - @sprite.half_width].min
+    [@speed, @spirit.center_x - @spirit.half_width].min
   end
 
   def finish?
-    super || @sprite.center_x <= @sprite.half_width
+    super || @spirit.center_x <= @spirit.half_width
   end
 end

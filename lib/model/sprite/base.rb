@@ -1,4 +1,4 @@
-module Sprite
+module Spirit
   class Base
     attr_accessor :center_x
     attr_accessor :center_y
@@ -30,7 +30,7 @@ module Sprite
     end
 
     def add_behaviour(behaviour)
-      behaviour.attach_sprite(self)
+      behaviour.attach_spirit(self)
       @behaviours << behaviour
       self
     end

@@ -9,16 +9,16 @@ class MoveTo < Behaviour::Base
   def update
     return if finish?
 
-    @sprite.center_x += speed_x
-    @sprite.center_y += speed_y
+    @spirit.center_x += speed_x
+    @spirit.center_y += speed_y
   end
 
   def distance_x
-    @target_x - @sprite.center_x
+    @target_x - @spirit.center_x
   end
 
   def distance_y
-    @target_y - @sprite.center_y
+    @target_y - @spirit.center_y
   end
 
   def distance
@@ -34,6 +34,6 @@ class MoveTo < Behaviour::Base
   end
 
   def finish?
-    super || (@sprite.center_x - @target_x).abs < speed_x.abs && (@sprite.center_y - @target_y).abs < speed_y.abs
+    super || (@spirit.center_x - @target_x).abs < speed_x.abs && (@spirit.center_y - @target_y).abs < speed_y.abs
   end
 end
