@@ -4,6 +4,15 @@ class Chain
   def initialize(spirit)
     @spirit = spirit
     @behaviour_builders = []
+    @args = {}
+  end
+
+  def set_argument(key, value)
+    @args[key] = value
+  end
+
+  def get_argument(key)
+    @args.fetch(key)
   end
 
   def add_behaviour(&block)

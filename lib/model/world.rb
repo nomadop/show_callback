@@ -42,8 +42,8 @@ class World
   end
 
   def close
-    exit(0)
     @window.close
+    exit(0)
   end
 
   def change_scene(scene)

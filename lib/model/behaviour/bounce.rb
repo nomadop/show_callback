@@ -1,4 +1,4 @@
-class Bouncing < Behaviour::Base
+class Bounce < Behaviour::Base
   def initialize(init_speed, bouncing_rate = 0.9)
     super()
     @init_speed = init_speed
@@ -9,7 +9,7 @@ class Bouncing < Behaviour::Base
 
   def attach_spirit(spirit)
     super
-    bouncing_after_reach_ground
+    bounce_after_reach_ground
   end
 
   def update
@@ -18,19 +18,17 @@ class Bouncing < Behaviour::Base
   end
 
   def finish?
-    super || @spirit.center_y + @spirit.half_height >= World::WORLD_HEIGHT
+    @spirit.center_y + @spirit.half_height >= World::WORLD_HEIGHT
   end
 
-  def bouncing_after_reach_ground
+  def bounce_after_reach_ground
     new_init_speed = @init_speed * @bouncing_rate
-    if new_init_speed < -@acc
-      add_callback(bouncing_callback(new_init_speed))
-    end
+    add_callback(bounce_callback(new_init_speed)) if new_init_speed < -@acc
   end
 
-  def bouncing_callback(new_init_speed)
+  def bounce_callback(new_init_speed)
     Callback.new(@spirit, new_init_speed, @bouncing_rate) do |spirit, init_speed, bouncing_rate|
-      spirit.add_behaviour(Bouncing.new(init_speed, bouncing_rate))
+      spirit.add_behaviour(Bounce.new(init_speed, bouncing_rate))
     end
   end
 end

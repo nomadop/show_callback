@@ -1,33 +1,15 @@
 module Behaviour
   class Base
-    attr_reader :spirit
-    attr_reader :callbacks
+    include Activable
 
     def initialize(*callbacks)
       @callbacks = []
       @callbacks += callbacks
       @active = false
-      @finish = false
-    end
-
-    def active?
-      @active
-    end
-
-    def inactive?
-      !@active
-    end
-
-    def active!
-      @active = true
     end
 
     def finish?
-      @finish
-    end
-
-    def finish!
-      @finish = true
+      false
     end
 
     def attach_spirit(spirit)
@@ -45,9 +27,9 @@ module Behaviour
     end
 
     def callback
-      @callbacks.each do |callback|
-        callback.call
-      end
+      @callbacks.each(&:call)
+
+      @callbacks.clear
     end
 
     def to_s

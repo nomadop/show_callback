@@ -9,7 +9,7 @@ class ShowcaseScene < Scene::Base
     showcase
   end
 
-  def add_case(&block)
+  def add_case(name, &block)
     @case_builders << block
     self
   end

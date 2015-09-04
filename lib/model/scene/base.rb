@@ -1,11 +1,12 @@
 module Scene
   class Base
     class << self
-      def keybind(kid, &block)
-        $keybinds << kid unless $keybinds.include?(kid)
-        define_method("key#{kid}_pressed", &block)
+      def keybind(key_id, &block)
+        $keybinds << key_id unless $keybinds.include?(key_id)
+        define_method("key#{key_id}_pressed", &block)
       end
     end
+
     attr_accessor :spirits
 
     def initialize
@@ -30,7 +31,7 @@ module Scene
     end
 
     def update
-      @spirits.each(&:update)
+      @spirits.select(&:active?).each(&:update)
       World.next_scene if finish?
     end
 
@@ -41,7 +42,7 @@ module Scene
     def start; end
 
     keybind(Gosu::KbEscape) do
-      World.next_scene
+      finish!
     end
 
     def method_missing(*args)

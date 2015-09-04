@@ -1,31 +1,30 @@
 module Spirit
   class Base
+    include Activable
+
     attr_accessor :center_x
     attr_accessor :center_y
     attr_accessor :height
     attr_accessor :width
 
     attr_accessor :image
-    attr_accessor :behaviours
 
     def initialize(image)
       @image = image
       @behaviours = []
+      @active = true
     end
 
     def update
       @behaviours.each do |behaviour|
-        next if behaviour.inactive?
+        next if behaviour.freeze?
 
         behaviour.update
-        if behaviour.finish?
-          behaviour.callback
-          behaviour.finish!
-        end
+        behaviour.callback if behaviour.finish?
       end
 
       @behaviours.delete_if { |behaviour| behaviour.active? && behaviour.finish? }
-      @behaviours.select(&:inactive?).each(&:active!)
+      @behaviours.select(&:freeze?).each(&:active!)
       true
     end
 
@@ -37,6 +36,17 @@ module Spirit
 
     def remove_behaviour(behaviour)
       @behaviours.delete(behaviour)
+      self
+    end
+
+    def clear_behaviours
+      @behaviours.clear
+    end
+
+    def add_callback(callback)
+      return self if @behaviours.empty?
+
+      @behaviours.last.add_callback(callback)
       self
     end
 

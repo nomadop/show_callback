@@ -1,4 +1,5 @@
 class Ball < Spirit::Base
+  DEFAULT_RADIUS = 50
 
   def initialize(center_x, center_y, radius, color)
     super(World.create_image(Circle.create(radius, color)))

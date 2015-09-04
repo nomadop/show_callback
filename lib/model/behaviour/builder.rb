@@ -1,6 +1,7 @@
 module Behaviour
   class Builder
-    def initialize(&block)
+    def initialize(*args, &block)
+      @args = args
       @builder = block.to_proc
     end
 
@@ -9,7 +10,7 @@ module Behaviour
     end
 
     def build
-      behaviour = @builder.call
+      behaviour = @args.empty? ? @builder.call : @builder.call(*@args)
       @after_build.call(behaviour) unless @after_build.nil?
       behaviour
     end

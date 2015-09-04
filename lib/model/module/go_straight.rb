@@ -20,6 +20,6 @@ module GoStraight
   end
 
   def stop!
-    @behaviours.clear
+    clear_behaviours
   end
 end

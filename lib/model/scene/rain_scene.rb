@@ -2,8 +2,9 @@ class RainScene < Scene::Base
   attr_accessor :ground_y
   attr_accessor :rain_remains
 
-  def initialize(rain_remains = 100, raining_rate = 0.2)
+  def initialize(rain_remains = 100, raining_rate = 0.2, ground_y = World::WORLD_HEIGHT - 50)
     super()
+    @ground_y = ground_y
     @rain_remains = rain_remains
     @raining_rate = raining_rate
   end
@@ -15,7 +16,7 @@ class RainScene < Scene::Base
 
   def update
     super
-    create_new_rain if rand < @raining_rate
+    @raining_rate.times { create_new_rain }
     finish! if !rain_remain? && @spirits.empty?
   end
 
@@ -29,12 +30,10 @@ class RainScene < Scene::Base
 
   def sun_raise
     sun = Sun.new
+    sun
+        .add_behaviour(Wait.new(3)
+        .add_callback(Callback.next_behaviour(sun, MoveTo.new(150, 100, 5))))
     add_spirit(sun)
-    behaviours_chain = Chain.new(sun)
-    behaviours_chain
-        .add_behaviour { Wait.new(1) }
-        .add_behaviour { MoveTo.new(150, 100, 5) }
-        .end!
   end
 
   def rain_remain?

@@ -14,6 +14,10 @@ class Callback
     def next_scene
       new { World.next_scene }
     end
+
+    def active_spirit(_spirit)
+      new(_spirit) { |spirit| spirit.active! }
+    end
   end
 
   def initialize(*args, &block)

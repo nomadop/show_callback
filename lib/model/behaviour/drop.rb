@@ -1,21 +1,21 @@
 class Drop < Behaviour::Base
+  DEFAULT_SPEED = 20
+
   def initialize(*callbacks)
     super
-    @speed = 0
-    @acc = 1
-  end
-
-  def attach_spirit(spirit)
-    super
-    add_callback(Callback.disappear(spirit))
+    @speed = DEFAULT_SPEED
   end
 
   def update
-    @speed += @acc
     @spirit.center_y += @speed
   end
 
   def finish?
-    super || @spirit.center_y >= World::WORLD_HEIGHT
+    @spirit.center_y >=
+        if World.scene.respond_to?(:ground_y)
+          World.scene.ground_y
+        else
+          World::WORLD_HEIGHT - @sprite.half_height
+        end
   end
 end

@@ -21,13 +21,13 @@ class WorldWindow < Gosu::Window
 
   def send_input(now)
     @last_input_at = now
-    @keybinds.each do |kid|
-      @scene.send("key#{kid}_pressed") if button_down?(kid)
+    @keybinds.each do |key_id|
+      @scene.send("key#{key_id}_pressed") if button_down?(key_id)
     end
   end
 
-  def register_keybind(kid)
-    @keybinds << kid
+  def register_keybind(key_id)
+    @keybinds << key_id
     self
   end
 end
