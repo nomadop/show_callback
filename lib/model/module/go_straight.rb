@@ -1,22 +1,22 @@
 module GoStraight
   def up
     stop!
-    add_behaviour(MoveUp.new)
+    add_behaviour(MoveUp)
   end
   
   def down
     stop!
-    add_behaviour(MoveDown.new)
+    add_behaviour(MoveDown)
   end
 
   def right
     stop!
-    add_behaviour(MoveRight.new)
+    add_behaviour(MoveRight)
   end
 
   def left
     stop!
-    add_behaviour(MoveLeft.new)
+    add_behaviour(MoveLeft)
   end
 
   def stop!

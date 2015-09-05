@@ -7,10 +7,10 @@ require_all './'
 World.world = World.new
 $keybinds.each { |key_id| World.window.register_keybind(key_id) }
 
-control_scene = ControlScene.new
 rain_scene = RainScene.new(1000, 3)
 showcase_scene = ShowcaseScene.new
 
+# Case 1
 showcase_scene.add_case('Bouncing Balls') do
   bouncing_ball1 = Ball.new(100, World::WORLD_HEIGHT - 50, Ball::DEFAULT_RADIUS, Color::RED)
   behaviour_chain = Chain.new(bouncing_ball1)
@@ -40,6 +40,7 @@ showcase_scene.add_case('Bouncing Balls') do
   [bouncing_ball1, bouncing_ball2]
 end
 
+# Case 2
 showcase_scene.add_case('Ball running in a path') do
   spirit = Ball.new(70, 100, Ball::DEFAULT_RADIUS, Color::PURPLE)
   path = [
@@ -60,6 +61,7 @@ showcase_scene.add_case('Ball running in a path') do
   behaviour_chain.end!
 end
 
+#Case 3
 showcase_scene.add_case('Ball running in clockwise') do
   padding = 150
   spirit = Ball.new(padding, padding, Ball::DEFAULT_RADIUS, Color::GREEN)
@@ -76,6 +78,7 @@ showcase_scene.add_case('Ball running in clockwise') do
       .loop!
 end
 
+# Case 4
 showcase_scene.add_case('Passing energy between balls') do
   balls = [
       Ball.new(100, 100, Ball::DEFAULT_RADIUS, Color::RED),
@@ -110,7 +113,7 @@ showcase_scene.add_case('Passing energy between balls') do
 end
 
 World
-    .add_scene(control_scene)
+    .add_scene(ControlScene)
     .add_scene(rain_scene)
     .add_scene(showcase_scene)
 

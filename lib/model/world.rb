@@ -47,9 +47,10 @@ class World
   end
 
   def change_scene(scene)
+    @scenes.delete(scene)
+    scene = scene.new if scene.respond_to?(:new)
     @scene = scene
     @window.scene = @scene
-    @scenes.delete(scene)
     @scene.start
   end
 

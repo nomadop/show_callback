@@ -28,7 +28,12 @@ module Spirit
       true
     end
 
-    def add_behaviour(behaviour)
+    def add_behaviour(*args)
+      if args[0].is_a?(Class)
+        behaviour = args[0].new(*args[1...-1])
+      else
+        behaviour = args[0]
+      end
       behaviour.attach_spirit(self)
       @behaviours << behaviour
       self
@@ -41,13 +46,6 @@ module Spirit
 
     def clear_behaviours
       @behaviours.clear
-    end
-
-    def add_callback(callback)
-      return self if @behaviours.empty?
-
-      @behaviours.last.add_callback(callback)
-      self
     end
 
     def draw
