@@ -16,12 +16,12 @@ class RainScene < Scene::Base
 
   def create_bouncing_ball
     @bouncing_ball = Ball.new(100, ground_y - 70, 70, Color::RED)
-    bouncing_chain = Chain.new(@bouncing_ball)
+    bouncing_chain = Behaviour::Chain.new(@bouncing_ball)
     bouncing_chain
         .add_behaviour { Bounce.new(-25) }
         .loop!
 
-    swing_chain = Chain.new(@bouncing_ball)
+    swing_chain = Behaviour::Chain.new(@bouncing_ball)
     swing_chain
         .add_behaviour { MoveRight.new(World::WORLD_WIDTH, 15) }
         .add_behaviour { MoveLeft.new(World::WORLD_WIDTH, 15) }
