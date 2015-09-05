@@ -7,19 +7,19 @@ class ControlScene < Scene::Base
   end
 
   keybind(Gosu::KbUp) do
-    @control_spirit.up
+    @control_spirit.go_up
   end
 
   keybind(Gosu::KbDown) do
-    @control_spirit.down
+    @control_spirit.go_down
   end
 
   keybind(Gosu::KbLeft) do
-    @control_spirit.left
+    @control_spirit.go_left
   end
 
   keybind(Gosu::KbRight) do
-    @control_spirit.right
+    @control_spirit.go_right
   end
 
   keybind(Gosu::KbSpace) do

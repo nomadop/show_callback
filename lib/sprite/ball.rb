@@ -1,6 +1,8 @@
 class Ball < Spirit::Base
   DEFAULT_RADIUS = 50
 
+  attr_accessor :radius
+
   def initialize(center_x, center_y, radius, color)
     super(World.create_image(Circle.create(radius, color)))
     @center_x = center_x
@@ -17,10 +19,14 @@ class Ball < Spirit::Base
   end
 
   def width
-    @radius * 2
+    height
   end
 
   def width=(width)
-    @radius = width / 2
+    self.height = width
+  end
+
+  def collide?(other)
+    other.is_a?(Ball) ? center.distance_to(other.center) < @radius + other.radius : super
   end
 end

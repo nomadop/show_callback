@@ -15,6 +15,7 @@ class Bounce < Behaviour::Base
   end
 
   def finish?
-    @spirit.center_y + @spirit.half_height >= World::WORLD_HEIGHT
+    @spirit.center_y + @spirit.half_height >=
+        (World.scene.respond_to?(:ground_y) ? World.scene.ground_y : World::WORLD_HEIGHT)
   end
 end

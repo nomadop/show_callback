@@ -51,6 +51,10 @@ module Spirit
       @behaviours.clear
     end
 
+    def add_callback(callback)
+      @behaviours.last.add_callback(callback) unless @behaviours.empty?
+    end
+
     def draw
       @image.draw(upper_left.x, upper_left.y, 0)
     end
@@ -60,7 +64,7 @@ module Spirit
     end
 
     def upper_left
-      Point.new(center_x - width / 2, center_y - height / 2)
+      Point.new(left_x, top_y)
     end
 
     def half_height
@@ -69,6 +73,27 @@ module Spirit
 
     def half_width
       width / 2
+    end
+
+    def top_y
+      center_y - half_height
+    end
+
+    def bottom_y
+      center_y + half_height
+    end
+
+    def left_x
+      center_x - half_width
+    end
+
+    def right_x
+      center_x + half_width
+    end
+
+    def collide?(other)
+      (self.center_x - other.center_x).abs < self.half_width + other.half_width &&
+      (self.center_y - other.center_y).abs < self.half_height + other.half_height
     end
   end
 end
