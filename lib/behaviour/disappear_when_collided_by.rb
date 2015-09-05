@@ -1,4 +1,4 @@
-class DisappearWhenCollideTarget < Behaviour::Base
+class DisappearWhenCollidedBy < Behaviour::Base
   def initialize(target, *callbacks)
     super(*callbacks)
     @target = target

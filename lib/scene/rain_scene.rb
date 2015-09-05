@@ -1,9 +1,9 @@
 class RainScene < Scene::Base
   attr_accessor :ground_y
 
-  def initialize(rain_remains, raining_rate, ground_y = World::WORLD_HEIGHT - 100)
+  def initialize(rain_remains, raining_rate, ground_height = 100)
     super()
-    @ground_y = ground_y
+    @ground_y = World::WORLD_HEIGHT - ground_height
     @rain_remains = rain_remains
     @raining_rate = raining_rate
   end
@@ -15,18 +15,7 @@ class RainScene < Scene::Base
   end
 
   def create_bouncing_ball
-    @bouncing_ball = Ball.new(100, ground_y - 70, 70, Color::RED)
-    bouncing_chain = Behaviour::Chain.new(@bouncing_ball)
-    bouncing_chain
-        .add_behaviour { Bounce.new(-25) }
-        .loop!
-
-    swing_chain = Behaviour::Chain.new(@bouncing_ball)
-    swing_chain
-        .add_behaviour { MoveRight.new(World::WORLD_WIDTH, 15) }
-        .add_behaviour { MoveLeft.new(World::WORLD_WIDTH, 15) }
-        .loop!
-
+    @bouncing_ball = BallFactory.bouncing_ball_swing_left_and_right(100, 70, Color::RED, 25, 15)
     add_spirit(@bouncing_ball)
   end
 
@@ -40,7 +29,7 @@ class RainScene < Scene::Base
       rain = BallFactory.rain
       rain
           .add_behaviour(MoveDown.new(ground_y, 10).add_callback(Callback.disappear(rain)))
-          .add_behaviour(DisappearWhenCollideTarget.new(@bouncing_ball))
+          .add_behaviour(DisappearWhenCollidedBy.new(@bouncing_ball))
       add_spirit(rain)
       @rain_remains -= 1
       sun_raise unless rain_remain?

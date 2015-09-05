@@ -1,7 +1,7 @@
 class Bounce < Behaviour::Base
   def initialize(init_speed, *callbacks)
     super(*callbacks)
-    @speed = init_speed
+    @speed = -init_speed
     @acc = 1
   end
 

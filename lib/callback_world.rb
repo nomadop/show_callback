@@ -21,11 +21,11 @@ class CallbackWorld
       showcase_scene.add_case('Bouncing Balls') do
         bouncing_ball1 =
             BallFactory.bouncing_ball_with_a_reduce_rate(
-                World::WORLD_WIDTH / 2, Ball::DEFAULT_RADIUS, Color::RED, -40, 0.9)
+                World::WORLD_WIDTH / 2, Ball::DEFAULT_RADIUS, Color::RED, 40, 0.9)
 
         bouncing_ball2 =
             BallFactory.bouncing_ball_swing_left_and_right(
-                200, Ball::DEFAULT_RADIUS, Color::BLUE, -25, 10)
+                200, Ball::DEFAULT_RADIUS, Color::BLUE, 25, 10)
 
         [bouncing_ball1, bouncing_ball2]
       end
