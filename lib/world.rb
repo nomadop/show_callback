@@ -19,8 +19,8 @@ class World
       world.send(*args)
     end
   end
-  WORLD_WIDTH = 640
-  WORLD_HEIGHT = 480
+  WORLD_WIDTH = 1280
+  WORLD_HEIGHT = 800
 
   attr_accessor :window
   attr_accessor :scene

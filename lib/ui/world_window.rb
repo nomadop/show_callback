@@ -7,7 +7,7 @@ class WorldWindow < Gosu::Window
     @scene = Scene::Base.new
     @keybinds = []
     @last_input_at = Time.at(0)
-    @default_font = Gosu::Font.new(self, Gosu::default_font_name, 24)
+    @default_font = Gosu::Font.new(self, Gosu::default_font_name, 48)
   end
 
   def update
@@ -19,7 +19,7 @@ class WorldWindow < Gosu::Window
 
   def draw
     @scene.draw
-    @default_font.draw("FPS: #{Gosu::fps}", World::WORLD_WIDTH - 100, 10, 1)
+    @default_font.draw("FPS: #{Gosu::fps}", World::WORLD_WIDTH - 200, 20, 1)
   end
 
   def send_input(now)

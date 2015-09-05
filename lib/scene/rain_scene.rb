@@ -2,7 +2,7 @@ class RainScene < Scene::Base
   attr_accessor :ground_y
   attr_accessor :rain_remains
 
-  def initialize(rain_remains = 100, raining_rate = 0.2, ground_y = World::WORLD_HEIGHT - 50)
+  def initialize(rain_remains = 100, raining_rate = 0.2, ground_y = World::WORLD_HEIGHT - 100)
     super()
     @ground_y = ground_y
     @rain_remains = rain_remains
