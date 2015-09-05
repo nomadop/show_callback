@@ -1,7 +1,8 @@
 class ControlScene < Scene::Base
   def start!
     super
-    @control_spirit = Ball.new(World::WORLD_WIDTH / 2, World::WORLD_HEIGHT / 2, Ball::DEFAULT_RADIUS, Color::WHITE)
+    @control_spirit =
+        BallFactory.ball(World::WORLD_WIDTH / 2, World::WORLD_HEIGHT / 2, Ball::DEFAULT_RADIUS, Color::WHITE)
     @control_spirit.extend(GoStraight)
     add_spirit(@control_spirit)
   end

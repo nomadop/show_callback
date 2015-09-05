@@ -37,7 +37,7 @@ class RainScene < Scene::Base
 
   def create_new_rain
     if rain_remain?
-      rain = Rain.new
+      rain = BallFactory.rain
       rain
           .add_behaviour(MoveDown.new(ground_y, 10).add_callback(Callback.disappear(rain)))
           .add_behaviour(DisappearWhenCollideTarget.new(@bouncing_ball))
@@ -48,7 +48,7 @@ class RainScene < Scene::Base
   end
 
   def sun_raise
-    sun = Sun.new
+    sun = BallFactory.sun
     sun
         .add_behaviour(Wait.new(3)
         .add_callback(Callback.next_behaviour(sun, MoveTo.new(150, 100, 5)

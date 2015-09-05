@@ -19,30 +19,13 @@ class CallbackWorld
 
     def add_case1(showcase_scene)
       showcase_scene.add_case('Bouncing Balls') do
-        bouncing_ball1 = Ball.new(World::WORLD_WIDTH / 2, World::WORLD_HEIGHT - 50, Ball::DEFAULT_RADIUS, Color::RED)
-        behaviour_chain = Chain.new(bouncing_ball1)
-        behaviour_chain
-            .set_argument(:init_speed, -40)
-            .set_argument(:bouncing_rate, 0.9)
-            .add_behaviour do |chain|
-          init_speed = chain.get_argument(:init_speed) * chain.get_argument(:bouncing_rate)
-          chain.set_argument(:init_speed, init_speed)
-          Bounce.new(init_speed)
-        end.loop!
+        bouncing_ball1 =
+            BallFactory.bouncing_ball_with_a_reduce_rate(
+                World::WORLD_WIDTH / 2, Ball::DEFAULT_RADIUS, Color::RED, -40, 0.9)
 
-        bouncing_ball2 = Ball.new(200, World::WORLD_HEIGHT - Ball::DEFAULT_RADIUS, Ball::DEFAULT_RADIUS, Color::BLUE)
-        init_bounce_speed = -25
-        bounce_chain = Chain.new(bouncing_ball2)
-        bounce_chain
-            .add_behaviour { Bounce.new(init_bounce_speed) }
-            .loop!
-
-        swing_speed = 10
-        swing_chain = Chain.new(bouncing_ball2)
-        swing_chain
-            .add_behaviour { MoveRight.new(World::WORLD_WIDTH, swing_speed) }
-            .add_behaviour { MoveLeft.new(World::WORLD_WIDTH, swing_speed) }
-            .loop!
+        bouncing_ball2 =
+            BallFactory.bouncing_ball_swing_left_and_right(
+                200, Ball::DEFAULT_RADIUS, Color::BLUE, -25, 10)
 
         [bouncing_ball1, bouncing_ball2]
       end
@@ -50,7 +33,6 @@ class CallbackWorld
 
     def add_case2(showcase_scene)
       showcase_scene.add_case('Ball running in a path') do
-        spirit = Ball.new(70, 100, Ball::DEFAULT_RADIUS, Color::PURPLE)
         movements = [
             MoveDown, MoveRight, MoveDown, MoveLeft, MoveDown,
             MoveRight, MoveRight, MoveRight, MoveUp, MoveLeft,
@@ -58,32 +40,14 @@ class CallbackWorld
             MoveRight, MoveDown, MoveLeft, MoveDown, MoveRight
         ]
 
-        distance, speed = 200, 10
-        movement_chain = Chain.new(spirit)
-        movements.each do |movement|
-          movement_chain
-              .add_behaviour { movement.new(distance, speed) }
-              .add_behaviour { Wait.new(0.1) }
-        end
-        movement_chain.end!
+        BallFactory.ball_running_in_movement_queue(
+            100, 100, Ball::DEFAULT_RADIUS, Color::PURPLE, movements, 200, 10)
       end
     end
 
     def add_case3(showcase_scene)
       showcase_scene.add_case('Ball running in clockwise') do
-        padding = 200
-        spirit = Ball.new(padding, padding, Ball::DEFAULT_RADIUS, Color::GREEN)
-        movement_chain = Chain.new(spirit)
-        movement_chain
-            .add_behaviour { MoveDown.new(World::WORLD_HEIGHT - padding * 2, 10) }
-            .add_behaviour { Wait.new(0.5) }
-            .add_behaviour { MoveRight.new(World::WORLD_WIDTH - padding * 2, 15) }
-            .add_behaviour { Wait.new(0.5) }
-            .add_behaviour { MoveUp.new(World::WORLD_HEIGHT - padding * 2, 10) }
-            .add_behaviour { Wait.new(0.5) }
-            .add_behaviour { MoveLeft.new(World::WORLD_WIDTH - padding * 2, 15) }
-            .add_behaviour { Wait.new(0.5) }
-            .loop!
+        BallFactory.ball_running_in_clockwise(150, Ball::DEFAULT_RADIUS, Color::GREEN, 15)
       end
     end
 
@@ -91,12 +55,12 @@ class CallbackWorld
       showcase_scene.add_case('Passing energy between balls') do
         radius = 100
         balls = [
-            Ball.new(200, 200, radius, Color::RED),
-            Ball.new(200, 600, radius, Color::YELLOW),
-            Ball.new(640, 600, radius, Color::GREEN),
-            Ball.new(1080, 600, radius, Color::CYAN),
-            Ball.new(1080, 200, radius, Color::BLUE),
-            Ball.new(640, 200, radius, Color::PURPLE)
+            BallFactory.ball(200, 200, radius, Color::RED),
+            BallFactory.ball(200, 600, radius, Color::YELLOW),
+            BallFactory.ball(640, 600, radius, Color::GREEN),
+            BallFactory.ball(1080, 600, radius, Color::CYAN),
+            BallFactory.ball(1080, 200, radius, Color::BLUE),
+            BallFactory.ball(640, 200, radius, Color::PURPLE)
         ]
         balls.each(&:freeze!)
 
