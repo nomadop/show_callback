@@ -8,8 +8,7 @@ class Circle
     end
 
     def create(radius, color)
-      @@factory[color.to_s] ||= {}
-      @@factory[color.to_s][radius.to_s] || @@factory[color.to_s][radius.to_s] = new(radius, color)
+      @@factory["#{color}#{radius}"] || @@factory["#{color}#{radius}"] = new(radius, color)
     end
   end
 

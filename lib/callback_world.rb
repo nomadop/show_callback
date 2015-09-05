@@ -32,7 +32,7 @@ class CallbackWorld
     end
 
     def add_case2(showcase_scene)
-      showcase_scene.add_case('Ball running in a path') do
+      showcase_scene.add_case('Ball running in movements queue') do
         movements = [
             MoveDown, MoveRight, MoveDown, MoveLeft, MoveDown,
             MoveRight, MoveRight, MoveRight, MoveUp, MoveLeft,
