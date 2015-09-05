@@ -7,6 +7,7 @@ class Drop < Behaviour::Base
   end
 
   def update
+    super
     @spirit.center_y += @speed
   end
 

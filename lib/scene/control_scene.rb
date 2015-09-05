@@ -1,5 +1,6 @@
 class ControlScene < Scene::Base
-  def start
+  def start!
+    super
     @control_spirit = Ball.new(320, 240, 50, Color::WHITE)
     @control_spirit.extend(GoStraight)
     add_spirit(@control_spirit)

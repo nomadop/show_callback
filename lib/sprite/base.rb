@@ -24,8 +24,11 @@ module Spirit
       end
 
       @behaviours.delete_if { |behaviour| behaviour.active? && behaviour.finish? }
-      @behaviours.select(&:freeze?).each(&:active!)
-      true
+      active_all_behaviours
+    end
+
+    def active_all_behaviours
+      @behaviours.each(&:active!)
     end
 
     def add_behaviour(*args)

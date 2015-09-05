@@ -11,7 +11,17 @@ module Scene
 
     def initialize
       @spirits = []
+      @started = false
       @finished = false
+    end
+
+    def start!
+      return if start?
+      @started = true
+    end
+
+    def start?
+      @started
     end
 
     def finish!
@@ -38,8 +48,6 @@ module Scene
     def draw
       @spirits.each(&:draw)
     end
-
-    def start; end
 
     keybind(Gosu::KbEscape) do
       finish!

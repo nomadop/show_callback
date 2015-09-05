@@ -8,6 +8,10 @@ module Behaviour
       @active = false
     end
 
+    def update
+      return if finish?
+    end
+
     def finish?
       false
     end

@@ -9,7 +9,7 @@ class RainScene < Scene::Base
     @raining_rate = raining_rate
   end
 
-  def start
+  def start!
     super
     create_new_rain
   end
