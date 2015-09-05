@@ -24,7 +24,7 @@ class RainScene < Scene::Base
     if rain_remain?
       add_spirit(Rain.new)
       @rain_remains -= 1
-      sun_raise if @rain_remains == 0
+      sun_raise unless rain_remain?
     end
   end
 

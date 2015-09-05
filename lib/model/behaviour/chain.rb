@@ -1,4 +1,5 @@
-class Chain
+class
+Chain
   attr_reader :behaviour_builders
 
   def initialize(spirit)
@@ -9,6 +10,7 @@ class Chain
 
   def set_argument(key, value)
     @args[key] = value
+    self
   end
 
   def get_argument(key)
@@ -16,7 +18,7 @@ class Chain
   end
 
   def add_behaviour(&block)
-    behaviour_builder = Behaviour::Builder.new(&block)
+    behaviour_builder = Behaviour::Builder.new(self, &block)
     link_behaviour(behaviour_builder)
 
     @behaviour_builders << behaviour_builder

@@ -12,20 +12,32 @@ rain_scene = RainScene.new(1000, 3)
 showcase_scene = ShowcaseScene.new
 
 showcase_scene.add_case('Bouncing Balls') do
-  spirit1 = Ball.new(100, World::WORLD_HEIGHT - 40, 40, Color::RED)
-  spirit1.add_behaviour(Bounce.new(-30))
+  bouncing_ball1 = Ball.new(100, World::WORLD_HEIGHT - 50, Ball::DEFAULT_RADIUS, Color::RED)
+  behaviour_chain = Chain.new(bouncing_ball1)
+  behaviour_chain
+      .set_argument(:init_speed, -30)
+      .set_argument(:bouncing_rate, 0.9)
+      .add_behaviour do |chain|
+        init_speed = chain.get_argument(:init_speed) * chain.get_argument(:bouncing_rate)
+        chain.set_argument(:init_speed, init_speed)
+        Bounce.new(init_speed)
+      end.loop!
 
-  spirit2 = Ball.new(300, World::WORLD_HEIGHT - Ball::DEFAULT_RADIUS, Ball::DEFAULT_RADIUS, Color::BLUE)
-  spirit2.add_behaviour(Bounce.new(-20, 1))
+  bouncing_ball2 = Ball.new(300, World::WORLD_HEIGHT - Ball::DEFAULT_RADIUS, Ball::DEFAULT_RADIUS, Color::BLUE)
+  init_bounce_speed = -20
+  bounce_chain = Chain.new(bouncing_ball2)
+  bounce_chain
+      .add_behaviour { Bounce.new(init_bounce_speed) }
+      .loop!
 
   swing_speed = 5
-  behaviour_chain = Chain.new(spirit2)
-  behaviour_chain
+  swing_chain = Chain.new(bouncing_ball2)
+  swing_chain
       .add_behaviour { MoveRight.new(swing_speed * 39, swing_speed) }
       .add_behaviour { MoveLeft.new(swing_speed * 39, swing_speed) }
       .loop!
 
-  [spirit1, spirit2]
+  [bouncing_ball1, bouncing_ball2]
 end
 
 showcase_scene.add_case('Ball running in a path') do
@@ -53,13 +65,13 @@ showcase_scene.add_case('Ball running in clockwise') do
   spirit = Ball.new(padding, padding, Ball::DEFAULT_RADIUS, Color::GREEN)
   behaviour_chain = Chain.new(spirit)
   behaviour_chain
-      .add_behaviour { MoveDown.new(World::WORLD_HEIGHT - padding * 2) }
+      .add_behaviour { MoveDown.new(World::WORLD_HEIGHT - padding * 2, 5) }
       .add_behaviour { Wait.new(0.5) }
-      .add_behaviour { MoveRight.new(World::WORLD_WIDTH - padding * 2, 10) }
+      .add_behaviour { MoveRight.new(World::WORLD_WIDTH - padding * 2, 7) }
       .add_behaviour { Wait.new(0.5) }
-      .add_behaviour { MoveUp.new(World::WORLD_HEIGHT - padding * 2) }
+      .add_behaviour { MoveUp.new(World::WORLD_HEIGHT - padding * 2, 5) }
       .add_behaviour { Wait.new(0.5) }
-      .add_behaviour { MoveLeft.new(World::WORLD_WIDTH - padding * 2, 10) }
+      .add_behaviour { MoveLeft.new(World::WORLD_WIDTH - padding * 2, 7) }
       .add_behaviour { Wait.new(0.5) }
       .loop!
 end
