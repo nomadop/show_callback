@@ -19,8 +19,8 @@ class Callback
       new(_spirit) { |spirit| spirit.active! }
     end
 
-    def clear_behaviours(_spirit)
-      new(_spirit) { |spirit| spirit.clear_behaviours }
+    def freeze_spirit(_spirit)
+      new(_spirit) { |spirit| spirit.freeze! }
     end
   end
 
