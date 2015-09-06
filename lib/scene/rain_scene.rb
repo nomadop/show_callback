@@ -13,6 +13,12 @@ class RainScene < Scene::Base
   def start!
     super
     create_sun
+    create_bouncing_ball
+  end
+
+  def create_bouncing_ball
+    @bouncing_ball = BallFactory.bouncing_ball_swing_left_and_right(100, 70, Color::GREEN, 25, 15)
+    add_spirit(@bouncing_ball)
   end
 
   def rain_start!
@@ -41,6 +47,8 @@ class RainScene < Scene::Base
       drop = BallFactory.drop
       drop
           .add_behaviour(MoveDown.new(ground_y, drop_speed)
+            .add_callback(Callback.disappear(drop)))
+          .add_behaviour(CollideWith.new(@bouncing_ball)
             .add_callback(Callback.disappear(drop)))
       add_spirit(drop)
     end
