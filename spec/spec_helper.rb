@@ -22,12 +22,8 @@ RSpec.configure do |config|
     stub_const("World", class_double("World"))
     stub_const("World::WORLD_WIDTH", 640)
     stub_const("World::WORLD_HEIGHT", 480)
-    allow(World).to receive(:create_image).with(anything)
+    allow(World).to receive(:circle_image).with(anything, anything).and_return(nil)
     allow(World).to receive(:scene).and_return(double)
-    stub_const("Color", double)
-    allow(Color).to receive(:new).with(anything, anything, anything).and_return(nil)
-    stub_const("Circle", double)
-    allow(Circle).to receive(:create).with(anything, anything).and_return(nil)
   end
 
   # rspec-expectations config goes here. You can use an alternate
