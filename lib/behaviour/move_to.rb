@@ -1,6 +1,6 @@
 class MoveTo < Behaviour::Base
-  def initialize(target_x, target_y, speed, *callbacks)
-    super(*callbacks)
+  def initialize(target_x, target_y, speed)
+    super()
     @target_x = target_x
     @target_y = target_y
     @speed = speed

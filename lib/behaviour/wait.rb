@@ -1,6 +1,6 @@
 class Wait < Behaviour::Base
-  def initialize(timeout, *callback)
-    super(*callback)
+  def initialize(timeout)
+    super()
     @timeout = timeout
   end
 

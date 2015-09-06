@@ -2,9 +2,8 @@ module Behaviour
   class Base
     include Activable
 
-    def initialize(*callbacks)
+    def initialize
       @callbacks = []
-      @callbacks += callbacks
       @active = false
     end
 
