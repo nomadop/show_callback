@@ -7,10 +7,16 @@ class MoveTo < Behaviour::Base
   end
 
   def update
-    return if finish?
+    @spirit.center_x += move_x
+    @spirit.center_y += move_y
+  end
 
-    @spirit.center_x += [speed_x, @target_x - @spirit.center_x].min_by(&:abs)
-    @spirit.center_y += [speed_y, @target_y - @spirit.center_y].min_by(&:abs)
+  def move_y
+    [speed_y, @target_y - @spirit.center_y].min_by(&:abs)
+  end
+
+  def move_x
+    [speed_x, @target_x - @spirit.center_x].min_by(&:abs)
   end
 
   def distance_x

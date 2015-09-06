@@ -4,7 +4,7 @@ class CallbackWorld
       World.new(caption: "Behaviours Callback Demo")
 
       showcase_scene = ShowcaseScene.new
-      rain_scene = RainScene.new(3000, 5)
+      rain_scene = RainScene.new(5000, 7)
 
       World
           .add_scene(ControlScene)
@@ -26,11 +26,11 @@ class CallbackWorld
 
         bouncing_ball2 =
             BallFactory.bouncing_ball_with_a_reduce_rate(
-                World::WORLD_WIDTH / 2, Ball::DEFAULT_RADIUS, Color::YELLOW, init_speed, 0.85)
+                World::WORLD_WIDTH / 2, Ball::DEFAULT_RADIUS, Color::YELLOW, init_speed, 0.8)
 
         bouncing_ball3 =
             BallFactory.bouncing_ball_with_a_reduce_rate(
-                1000, Ball::DEFAULT_RADIUS, Color::BLUE, init_speed, 0.8)
+                1000, Ball::DEFAULT_RADIUS, Color::BLUE, init_speed, 0.7)
 
 
         [bouncing_ball1, bouncing_ball2, bouncing_ball3]

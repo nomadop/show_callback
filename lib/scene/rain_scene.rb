@@ -37,9 +37,10 @@ class RainScene < Scene::Base
   def create_drop
     if drop_remain?
       @drop_remains -= 1
+      drop_speed = 10
       drop = BallFactory.drop
       drop
-          .add_behaviour(MoveDown.new(ground_y, 10)
+          .add_behaviour(MoveDown.new(ground_y, drop_speed)
             .add_callback(Callback.disappear(drop)))
       add_spirit(drop)
     end
