@@ -5,21 +5,21 @@ module Behaviour
     def initialize(spirit)
       @spirit = spirit
       @behaviour_builders = []
-      @args = {}
+      @options = {}
       yield(self) if block_given?
     end
 
-    def set_argument(key, value)
-      @args[key] = value
+    def set_options(key, value)
+      @options[key] = value
       self
     end
 
-    def get_argument(key)
-      @args.fetch(key)
+    def get_options(key)
+      @options.fetch(key)
     end
 
     def add_behaviour(&block)
-      behaviour_builder = Behaviour::Builder.new(self, &block)
+      behaviour_builder = Behaviour::Builder.new(&block)
       link_behaviour(behaviour_builder)
 
       @behaviour_builders << behaviour_builder
@@ -35,14 +35,6 @@ module Behaviour
       end
     end
 
-    def first_behaviour
-      first_builder.build
-    end
-
-    def first_builder
-      @behaviour_builders.first
-    end
-
     def loop!
       link_behaviour(first_builder)
       attach_spirit
@@ -52,8 +44,17 @@ module Behaviour
       attach_spirit
     end
 
+    private
+    def first_builder
+      @behaviour_builders.first
+    end
+
     def attach_spirit
       @spirit.add_behaviour(first_behaviour)
+    end
+
+    def first_behaviour
+      first_builder.build
     end
   end
 end

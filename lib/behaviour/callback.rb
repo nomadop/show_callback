@@ -1,39 +1,28 @@
 class Callback
   class << self
-    def disappear(_spirit)
-      new(_spirit) { |spirit| World.scene.remove_spirit(spirit) }
+
+    def disappear(spirit)
+      proc { World.scene.remove_spirit(spirit) }
     end
 
-    def next_behaviour(_spirit, _next_behaviour)
-      new(_spirit, _next_behaviour) do |spirit, next_behaviour|
+    def next_behaviour(spirit, next_behaviour)
+      proc do
         next_behaviour = next_behaviour.build if next_behaviour.is_a?(Behaviour::Builder)
         spirit.add_behaviour(next_behaviour) unless next_behaviour.nil?
       end
     end
 
     def next_scene
-      new { World.next_scene }
+      proc { World.next_scene }
     end
 
-    def active_spirit(_spirit)
-      new(_spirit) { |spirit| spirit.active! }
+    def active_spirit(spirit)
+      proc { spirit.active! }
     end
 
-    def freeze_spirit(_spirit)
-      new(_spirit) { |spirit| spirit.freeze! }
+    def freeze_spirit(spirit)
+      proc { spirit.freeze! }
     end
-  end
 
-  def initialize(*args, &block)
-    @args = args
-    @proc = proc(&block)
-  end
-
-  def call
-    @proc.call(*@args)
-  end
-
-  def to_s
-    @proc.to_s
   end
 end
