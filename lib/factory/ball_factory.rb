@@ -1,5 +1,6 @@
 class BallFactory
   class << self
+
     def ball(center_x, center_y, radius, color)
       Ball.new(center_x, center_y, radius, color)
     end
@@ -17,8 +18,7 @@ class BallFactory
     def bouncing_ball_with_a_reduce_rate(center_x, radius, color, init_speed, reduce_rate)
       center_y = World::WORLD_HEIGHT - radius
       bouncing_ball = ball(center_x, center_y, radius, color)
-      bouncing_ball.tap do
-        bouncing_chain = Behaviour::Chain.new(bouncing_ball)
+      bouncing_ball.add_behaviour_chain do |bouncing_chain|
         bouncing_chain
             .set_argument(:init_speed, init_speed / reduce_rate)
             .set_argument(:reduce_rate, reduce_rate)
@@ -33,13 +33,13 @@ class BallFactory
     def bouncing_ball_swing_left_and_right(center_x, radius, color, bouncing_speed, swing_speed)
       center_y = World::WORLD_HEIGHT - radius
       bouncing_ball = ball(center_x, center_y, radius, color)
-      bouncing_ball.tap do
-        bouncing_chain = Behaviour::Chain.new(bouncing_ball)
+      bouncing_ball.add_behaviour_chain do |bouncing_chain|
         bouncing_chain
             .add_behaviour { Bounce.new(bouncing_speed) }
             .loop!
+      end
 
-        swing_chain = Behaviour::Chain.new(bouncing_ball)
+      bouncing_ball.add_behaviour_chain do |swing_chain|
         swing_chain
             .add_behaviour { MoveRight.new(World::WORLD_WIDTH, swing_speed) }
             .add_behaviour { MoveLeft.new(World::WORLD_WIDTH, swing_speed) }
@@ -49,8 +49,7 @@ class BallFactory
 
     def ball_running_in_clockwise(padding, radius, color, speed)
       ball = ball(padding, padding, radius, color)
-      ball.tap do
-        movement_chain = Behaviour::Chain.new(ball)
+      ball.add_behaviour_chain do |movement_chain|
         movement_chain
             .add_behaviour { MoveDown.new(World::WORLD_HEIGHT - padding * 2, speed) }
             .add_behaviour { Wait.new(0.5) }
@@ -63,5 +62,6 @@ class BallFactory
             .loop!
       end
     end
+
   end
 end
