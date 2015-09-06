@@ -66,29 +66,29 @@ class CallbackWorld
         balls[0]
             .add_behaviour(MoveDown)
             .add_behaviour(CollideWith.new(balls[1])
-              .add_callback(Callback.clear_behaviours(balls[0]))
-              .add_callback(Callback.active_spirit(balls[1])))
+              .add_callback(Callback.active_spirit(balls[1]))
+              .add_callback(Callback.clear_behaviours(balls[0])))
             .active!
         balls[1]
             .add_behaviour(MoveRight)
             .add_behaviour(CollideWith.new(balls[2])
-              .add_callback(Callback.clear_behaviours(balls[1]))
-              .add_callback(Callback.active_spirit(balls[2])))
+              .add_callback(Callback.active_spirit(balls[2]))
+              .add_callback(Callback.clear_behaviours(balls[1])))
         balls[2]
             .add_behaviour(MoveRight)
             .add_behaviour(CollideWith.new(balls[3])
-              .add_callback(Callback.clear_behaviours(balls[2]))
-              .add_callback(Callback.active_spirit(balls[3])))
+              .add_callback(Callback.active_spirit(balls[3]))
+              .add_callback(Callback.clear_behaviours(balls[2])))
         balls[3]
             .add_behaviour(MoveUp)
             .add_behaviour(CollideWith.new(balls[4])
-              .add_callback(Callback.clear_behaviours(balls[3]))
-              .add_callback(Callback.active_spirit(balls[4])))
+              .add_callback(Callback.active_spirit(balls[4]))
+              .add_callback(Callback.clear_behaviours(balls[3])))
         balls[4]
             .add_behaviour(MoveLeft)
             .add_behaviour(CollideWith.new(balls[5])
-              .add_callback(Callback.clear_behaviours(balls[4]))
-              .add_callback(Callback.active_spirit(balls[5])))
+              .add_callback(Callback.active_spirit(balls[5]))
+              .add_callback(Callback.clear_behaviours(balls[4])))
         balls[5].add_behaviour(MoveLeft)
 
         balls

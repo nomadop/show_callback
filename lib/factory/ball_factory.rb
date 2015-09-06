@@ -34,8 +34,8 @@ class BallFactory
       center_y = World::WORLD_HEIGHT - radius
       bouncing_ball = ball(center_x, center_y, radius, color)
       bouncing_ball.tap do
-        bounce_chain = Behaviour::Chain.new(bouncing_ball)
-        bounce_chain
+        bouncing_chain = Behaviour::Chain.new(bouncing_ball)
+        bouncing_chain
             .add_behaviour { Bounce.new(bouncing_speed) }
             .loop!
 
@@ -44,19 +44,6 @@ class BallFactory
             .add_behaviour { MoveRight.new(World::WORLD_WIDTH, swing_speed) }
             .add_behaviour { MoveLeft.new(World::WORLD_WIDTH, swing_speed) }
             .loop!
-      end
-    end
-
-    def ball_running_in_movement_queue(center_x, center_y, radius, color, movements, distance, speed)
-      ball = ball(center_x, center_y, radius, color)
-      ball.tap do
-        movement_chain = Behaviour::Chain.new(ball)
-        movements.each do |movement|
-          movement_chain
-              .add_behaviour { movement.new(distance, speed) }
-              .add_behaviour { Wait.new(0.1) }
-        end
-        movement_chain.end!
       end
     end
 
