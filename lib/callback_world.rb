@@ -52,7 +52,7 @@ class CallbackWorld
 
     def add_case4(showcase_scene)
       showcase_scene.add_case('Passing energy between balls') do
-        radius = 100
+        radius = 120
         balls = [
             BallFactory.ball(200, 200, radius, Color::RED),
             BallFactory.ball(200, 600, radius, Color::YELLOW),
@@ -63,36 +63,30 @@ class CallbackWorld
         ]
         balls.each(&:freeze!)
 
-        balls[0]
-            .add_behaviour(MoveDown)
-            .add_behaviour(CollideWith.new(balls[1])
-              .add_callback(Callback.active_spirit(balls[1]))
-              .add_callback(Callback.freeze_spirit(balls[0])))
-            .active!
-        balls[1]
-            .add_behaviour(MoveRight)
-            .add_behaviour(CollideWith.new(balls[2])
-              .add_callback(Callback.active_spirit(balls[2]))
-              .add_callback(Callback.freeze_spirit(balls[1])))
-        balls[2]
-            .add_behaviour(MoveRight)
-            .add_behaviour(CollideWith.new(balls[3])
-              .add_callback(Callback.active_spirit(balls[3]))
-              .add_callback(Callback.freeze_spirit(balls[2])))
-        balls[3]
-            .add_behaviour(MoveUp)
-            .add_behaviour(CollideWith.new(balls[4])
-              .add_callback(Callback.active_spirit(balls[4]))
-              .add_callback(Callback.freeze_spirit(balls[3])))
-        balls[4]
-            .add_behaviour(MoveLeft)
-            .add_behaviour(CollideWith.new(balls[5])
-              .add_callback(Callback.active_spirit(balls[5]))
-              .add_callback(Callback.freeze_spirit(balls[4])))
-        balls[5].add_behaviour(MoveLeft)
+        initialize_balls_in_case4(balls[0], balls[1], MoveDown)
+        initialize_balls_in_case4(balls[1], balls[2], MoveRight)
+        initialize_balls_in_case4(balls[2], balls[3], MoveRight)
+        initialize_balls_in_case4(balls[3], balls[4], MoveUp)
+        initialize_balls_in_case4(balls[4], balls[5], MoveLeft)
+        initialize_balls_in_case4(balls[5], balls[0], MoveLeft)
+        balls[0].active!
 
         balls
       end
+    end
+
+    def initialize_balls_in_case4(ball, next_ball, movement)
+      ball.add_behaviour(movement)
+          .add_behaviour_chain do |collide_chain|
+            collide_chain
+              .add_behaviour do
+                CollideWith.new(next_ball)
+                  .add_callback(Callback.active_spirit(next_ball))
+                  .add_callback(Callback.freeze_spirit(ball))
+              end
+              .add_behaviour { Wait.new(0.1) }
+              .loop!
+          end
     end
   end
 end
