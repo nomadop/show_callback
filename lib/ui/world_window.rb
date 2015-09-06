@@ -33,4 +33,8 @@ class WorldWindow < Gosu::Window
     @keybinds << key_id
     self
   end
+
+  def circle_image(radius, color)
+    Gosu::Image.new(self, Circle.create(radius, color), false)
+  end
 end

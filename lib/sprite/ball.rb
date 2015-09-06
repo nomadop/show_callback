@@ -4,7 +4,7 @@ class Ball < Spirit::Base
   attr_accessor :radius
 
   def initialize(center_x, center_y, radius, color)
-    super(World.create_image(Circle.create(radius, color)))
+    super(World.circle_image(radius, color))
     @center_x = center_x
     @center_y = center_y
     @radius = radius
