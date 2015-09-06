@@ -2,10 +2,10 @@ module Behaviour
   class Chain
     attr_reader :behaviour_builders
 
-    def initialize(spirit)
+    def initialize(spirit, options = {})
       @spirit = spirit
       @behaviour_builders = []
-      @options = {}
+      @options = options
       yield(self) if block_given?
     end
 

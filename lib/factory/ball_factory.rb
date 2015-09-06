@@ -23,7 +23,6 @@ class BallFactory
             .add_behaviour { Bounce.new(bouncing_speed) }
             .loop!
       end
-
       bouncing_ball.add_behaviour_chain do |swing_chain|
         swing_chain
             .add_behaviour { MoveRight.new(World::WORLD_WIDTH, swing_speed) }
@@ -35,9 +34,8 @@ class BallFactory
     def bouncing_ball_with_a_reduce_rate(center_x, radius, color, init_speed, reduce_rate)
       center_y = World::WORLD_HEIGHT - radius
       bouncing_ball = ball(center_x, center_y, radius, color)
-      bouncing_ball.add_behaviour_chain do |bouncing_chain|
+      bouncing_ball.add_behaviour_chain(init_speed: init_speed) do |bouncing_chain|
         bouncing_chain
-            .set_options(:init_speed, init_speed / reduce_rate)
             .add_behaviour do
               init_speed = bouncing_chain.get_options(:init_speed) * reduce_rate
               bouncing_chain.set_options(:init_speed, init_speed)
