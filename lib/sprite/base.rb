@@ -51,8 +51,8 @@ module Spirit
       @behaviours.clear
     end
 
-    def add_behaviour_chain(options = {}, &block)
-      Behaviour::Chain.new(self, options, &block)
+    def add_behaviour_chain(arguments = {}, &block)
+      Behaviour::Chain.new(self, arguments, &block)
       self
     end
 

@@ -2,20 +2,20 @@ module Behaviour
   class Chain
     attr_reader :behaviour_builders
 
-    def initialize(spirit, options = {})
+    def initialize(spirit, arguments = {})
       @spirit = spirit
       @behaviour_builders = []
-      @options = options
+      @arguments = arguments
       yield(self) if block_given?
     end
 
-    def set_options(key, value)
-      @options[key] = value
+    def set_arguments(key, value)
+      @arguments[key] = value
       self
     end
 
-    def get_options(key)
-      @options.fetch(key)
+    def get_arguments(key)
+      @arguments.fetch(key)
     end
 
     def add_behaviour(&block)

@@ -37,8 +37,8 @@ class BallFactory
       bouncing_ball.add_behaviour_chain(init_speed: init_speed) do |bouncing_chain|
         bouncing_chain
             .add_behaviour do
-              init_speed = bouncing_chain.get_options(:init_speed) * reduce_rate
-              bouncing_chain.set_options(:init_speed, init_speed)
+              init_speed = bouncing_chain.get_arguments(:init_speed) * reduce_rate
+              bouncing_chain.set_arguments(:init_speed, init_speed)
               Bounce.new(init_speed)
             end.loop!
       end
