@@ -1,5 +1,5 @@
 class SimpleMovement < Behaviour::Base
-  DEFAULT_SPEED = 5
+  DEFAULT_SPEED = 10
 
   def initialize(distance, speed)
     super()

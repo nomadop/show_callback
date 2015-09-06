@@ -11,7 +11,7 @@ module Behaviour
 
     def build
       behaviour = @args.empty? ? @builder.call : @builder.call(*@args)
-      @after_build.call(behaviour) unless @after_build.nil?
+      @after_build.call(behaviour) unless behaviour.nil? || @after_build.nil?
       behaviour
     end
   end

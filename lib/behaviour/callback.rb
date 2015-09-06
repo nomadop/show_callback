@@ -7,7 +7,7 @@ class Callback
     def next_behaviour(_spirit, _next_behaviour)
       new(_spirit, _next_behaviour) do |spirit, next_behaviour|
         next_behaviour = next_behaviour.build if next_behaviour.is_a?(Behaviour::Builder)
-        spirit.add_behaviour(next_behaviour)
+        spirit.add_behaviour(next_behaviour) unless next_behaviour.nil?
       end
     end
 
@@ -17,6 +17,10 @@ class Callback
 
     def active_spirit(_spirit)
       new(_spirit) { |spirit| spirit.active! }
+    end
+
+    def clear_behaviours(_spirit)
+      new(_spirit) { |spirit| spirit.clear_behaviours }
     end
   end
 

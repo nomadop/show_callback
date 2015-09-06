@@ -27,6 +27,6 @@ class Ball < Spirit::Base
   end
 
   def collide?(other)
-    other.is_a?(Ball) ? center.distance_to(other.center) < @radius + other.radius : super
+    other.is_a?(Ball) ? center.distance_to(other.center) <= @radius + other.radius : super
   end
 end

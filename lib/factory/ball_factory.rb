@@ -4,7 +4,7 @@ class BallFactory
       Ball.new(center_x, center_y, radius, color)
     end
 
-    def rain(min_radius: 2, max_radius: 5, initial_y: 0)
+    def drop(min_radius: 2, max_radius: 5, initial_y: 0)
       center_x = 0.upto(World::WORLD_WIDTH).to_a.sample
       radius = min_radius.upto(max_radius).to_a.sample
       ball(center_x, initial_y, radius, Color.new(0, 100, 200))
@@ -20,7 +20,7 @@ class BallFactory
       bouncing_ball.tap do
         bouncing_chain = Behaviour::Chain.new(bouncing_ball)
         bouncing_chain
-            .set_argument(:init_speed, init_speed)
+            .set_argument(:init_speed, init_speed / reduce_rate)
             .set_argument(:reduce_rate, reduce_rate)
             .add_behaviour do |chain|
               init_speed = chain.get_argument(:init_speed) * chain.get_argument(:reduce_rate)

@@ -51,10 +51,6 @@ module Spirit
       @behaviours.clear
     end
 
-    def add_callback(callback)
-      @behaviours.last.add_callback(callback) unless @behaviours.empty?
-    end
-
     def draw
       @image.draw(upper_left.x, upper_left.y, 0)
     end
@@ -92,8 +88,8 @@ module Spirit
     end
 
     def collide?(other)
-      (self.center_x - other.center_x).abs < self.half_width + other.half_width &&
-      (self.center_y - other.center_y).abs < self.half_height + other.half_height
+      (self.center_x - other.center_x).abs <= self.half_width + other.half_width &&
+      (self.center_y - other.center_y).abs <= self.half_height + other.half_height
     end
   end
 end

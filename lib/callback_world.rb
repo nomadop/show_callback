@@ -3,8 +3,8 @@ class CallbackWorld
     def initialize
       World.new(caption: "Behaviours Callback Demo")
 
-      rain_scene = RainScene.new(2000, 5)
       showcase_scene = ShowcaseScene.new
+      rain_scene = RainScene.new(3000, 5)
 
       World
           .add_scene(ControlScene)
@@ -18,30 +18,29 @@ class CallbackWorld
     end
 
     def add_case1(showcase_scene)
-      showcase_scene.add_case('Bouncing Balls') do
+      showcase_scene.add_case('Bouncing Balls with a reduce rate') do
+        init_speed = 35
         bouncing_ball1 =
             BallFactory.bouncing_ball_with_a_reduce_rate(
-                World::WORLD_WIDTH / 2, Ball::DEFAULT_RADIUS, Color::RED, 40, 0.9)
+                280, Ball::DEFAULT_RADIUS, Color::RED, init_speed, 0.9)
 
         bouncing_ball2 =
-            BallFactory.bouncing_ball_swing_left_and_right(
-                200, Ball::DEFAULT_RADIUS, Color::BLUE, 25, 10)
+            BallFactory.bouncing_ball_with_a_reduce_rate(
+                World::WORLD_WIDTH / 2, Ball::DEFAULT_RADIUS, Color::YELLOW, init_speed, 0.85)
 
-        [bouncing_ball1, bouncing_ball2]
+        bouncing_ball3 =
+            BallFactory.bouncing_ball_with_a_reduce_rate(
+                1000, Ball::DEFAULT_RADIUS, Color::BLUE, init_speed, 0.8)
+
+
+        [bouncing_ball1, bouncing_ball2, bouncing_ball3]
       end
     end
 
     def add_case2(showcase_scene)
-      showcase_scene.add_case('Ball running in movements queue') do
-        movements = [
-            MoveDown, MoveRight, MoveDown, MoveLeft, MoveDown,
-            MoveRight, MoveRight, MoveRight, MoveUp, MoveLeft,
-            MoveUp, MoveRight, MoveUp, MoveRight, MoveDown,
-            MoveRight, MoveDown, MoveLeft, MoveDown, MoveRight
-        ]
-
-        BallFactory.ball_running_in_movement_queue(
-            100, 100, Ball::DEFAULT_RADIUS, Color::PURPLE, movements, 200, 10)
+      showcase_scene.add_case('Bouncing Ball swing left and right') do
+        BallFactory.bouncing_ball_swing_left_and_right(
+            100, Ball::DEFAULT_RADIUS, Color::PURPLE, 25, 10)
       end
     end
 
@@ -64,24 +63,33 @@ class CallbackWorld
         ]
         balls.each(&:freeze!)
 
-        speed = 10
         balls[0]
-            .add_behaviour(MoveTo.new(200, 400, speed)
-            .add_callback(Callback.active_spirit(balls[1])))
+            .add_behaviour(MoveDown)
+            .add_behaviour(CollideWith.new(balls[1])
+              .add_callback(Callback.clear_behaviours(balls[0]))
+              .add_callback(Callback.active_spirit(balls[1])))
             .active!
         balls[1]
-            .add_behaviour(MoveTo.new(440, 600, speed)
-            .add_callback(Callback.active_spirit(balls[2])))
+            .add_behaviour(MoveRight)
+            .add_behaviour(CollideWith.new(balls[2])
+              .add_callback(Callback.clear_behaviours(balls[1]))
+              .add_callback(Callback.active_spirit(balls[2])))
         balls[2]
-            .add_behaviour(MoveTo.new(880, 600, speed)
-            .add_callback(Callback.active_spirit(balls[3])))
+            .add_behaviour(MoveRight)
+            .add_behaviour(CollideWith.new(balls[3])
+              .add_callback(Callback.clear_behaviours(balls[2]))
+              .add_callback(Callback.active_spirit(balls[3])))
         balls[3]
-            .add_behaviour(MoveTo.new(1080, 400, speed)
-            .add_callback(Callback.active_spirit(balls[4])))
+            .add_behaviour(MoveUp)
+            .add_behaviour(CollideWith.new(balls[4])
+              .add_callback(Callback.clear_behaviours(balls[3]))
+              .add_callback(Callback.active_spirit(balls[4])))
         balls[4]
-            .add_behaviour(MoveTo.new(840, 200, speed)
-            .add_callback(Callback.active_spirit(balls[5])))
-        balls[5].add_behaviour(MoveTo.new(400, 200, speed))
+            .add_behaviour(MoveLeft)
+            .add_behaviour(CollideWith.new(balls[5])
+              .add_callback(Callback.clear_behaviours(balls[4]))
+              .add_callback(Callback.active_spirit(balls[5])))
+        balls[5].add_behaviour(MoveLeft)
 
         balls
       end
