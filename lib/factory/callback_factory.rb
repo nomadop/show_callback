@@ -1,4 +1,4 @@
-class Callback
+class CallbackFactory
   class << self
 
     def disappear(spirit)

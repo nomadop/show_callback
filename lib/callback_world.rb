@@ -81,8 +81,8 @@ class CallbackWorld
             collide_chain
               .add_behaviour do
                 CollideWith.new(next_ball)
-                  .add_callback(Callback.active_spirit(next_ball))
-                  .add_callback(Callback.freeze_spirit(ball))
+                  .add_callback(CallbackFactory.active_spirit(next_ball))
+                  .add_callback(CallbackFactory.freeze_spirit(ball))
               end
               .add_behaviour { Wait.new(0.1) }
               .loop!
