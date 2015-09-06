@@ -51,6 +51,11 @@ module Spirit
       @behaviours.clear
     end
 
+    def add_behaviour_chain(&block)
+      Behaviour::Chain.new(self, &block)
+      self
+    end
+
     def draw
       @image.draw(upper_left.x, upper_left.y, 0)
     end

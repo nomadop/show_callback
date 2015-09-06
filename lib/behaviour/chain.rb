@@ -6,6 +6,7 @@ module Behaviour
       @spirit = spirit
       @behaviour_builders = []
       @args = {}
+      yield(self) if block_given?
     end
 
     def set_argument(key, value)
