@@ -60,7 +60,7 @@ class RainScene < Scene::Base
         .add_behaviour(Wait.new(2)
           .add_callback(Callback.next_behaviour(sun, MoveTo.new(-150, -100, 5)
             .add_callback(Callback.next_behaviour(sun, Wait.new(1)
-              .add_callback(proc { rain_start! }))))))
+              .add_callback(lambda { rain_start! }))))))
     add_spirit(sun)
   end
 

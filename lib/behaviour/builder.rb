@@ -1,11 +1,11 @@
 module Behaviour
   class Builder
     def initialize(&block)
-      @builder = block.to_proc
+      @builder = block
     end
 
     def after_build(&block)
-      @after_build = block.to_proc
+      @after_build = block
     end
 
     def build

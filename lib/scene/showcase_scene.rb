@@ -11,7 +11,7 @@ class ShowcaseScene < Scene::Base
   end
 
   def add_case(name, &block)
-    @cases << { name: name, builder: block.to_proc }
+    @cases << { name: name, builder: block }
     self
   end
 
