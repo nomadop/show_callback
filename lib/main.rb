@@ -3,6 +3,12 @@ require 'require_all'
 
 require_all './'
 
+Kernel.module_eval do
+  def method_missing(method, *args, &block)
+    CallbackFactory.respond_to?(method) ? CallbackFactory.send(method, *args, &block) : super
+  end
+end
+
 CallbackWorld.initialize
 
 begin

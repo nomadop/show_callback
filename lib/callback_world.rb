@@ -1,16 +1,4 @@
-require_relative 'factory/callback_factory'
-
 class CallbackWorld
-  Kernel.module_eval do
-    def method_missing(method, *args, &block)
-      if CallbackFactory.respond_to?(method)
-        CallbackFactory.send(method, *args, &block)
-      else
-        super
-      end
-    end
-  end
-
   class << self
     def initialize
       World.new(caption: 'Behaviours Callback Demo')
