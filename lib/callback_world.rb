@@ -18,14 +18,14 @@ class CallbackWorld
     end
 
     def add_case1(showcase_scene)
-      showcase_scene.add_case('Bouncing Ball swing left and right') do
+      showcase_scene.add_case('Bouncing ball swing left and right') do
         BallFactory.bouncing_ball_swing_left_and_right(
             100, Ball::DEFAULT_RADIUS, Color::PURPLE, 25, 10)
       end
     end
 
     def add_case2(showcase_scene)
-      showcase_scene.add_case('Bouncing Balls with a reduce rate') do
+      showcase_scene.add_case('Bouncing balls with reduce rate') do
         init_speed = 35
         bouncing_ball1 =
             BallFactory.bouncing_ball_with_a_reduce_rate(
@@ -51,7 +51,7 @@ class CallbackWorld
     end
 
     def add_case4(showcase_scene)
-      showcase_scene.add_case('Passing energy between balls') do
+      showcase_scene.add_case('Collision between balls') do
         radius = 120
         balls = [
             BallFactory.ball(200, 200, radius, Color::RED),

@@ -2,6 +2,7 @@ module Scene
   class Base
     class << self
       def keybind(key_id, &block)
+        $keybinds ||= []
         $keybinds << key_id unless $keybinds.include?(key_id)
         define_method("key#{key_id}_pressed", &block)
       end

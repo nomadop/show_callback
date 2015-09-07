@@ -1,7 +1,6 @@
 require 'gosu'
 require 'require_all'
 
-$keybinds = []
 require_all './'
 
 CallbackWorld.initialize

@@ -21,6 +21,12 @@ class ShowcaseScene < Scene::Base
     showcase
   end
 
+  def pre_case
+    @case_index -= 1
+    @case_index = @cases.size - 1 if @case_index < 0
+    showcase
+  end
+
   def showcase
     @spirits.clear
     builder = current_case[:builder]
@@ -38,7 +44,11 @@ class ShowcaseScene < Scene::Base
     World.window.default_font.draw(case_name, 20, 20, 1)
   end
 
-  keybind(Gosu::KbSpace) do
+  keybind(Gosu::KbLeft) do
+    pre_case
+  end
+
+  keybind(Gosu::KbRight) do
     next_case
   end
 end
