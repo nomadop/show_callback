@@ -47,7 +47,17 @@ class RainScene < Scene::Base
       drop = BallFactory.drop
       drop
           .add_behaviour(MoveDown.new(ground_y, drop_speed)
-            .add_callback(CallbackFactory.disappear(drop)))
+            .add_callback(CallbackFactory.next_behaviour_chain(drop) do |bouncing_chain|
+                            bouncing_chain
+                              .set_arguments(:speed, 15 + rand(5))
+                              .add_behaviour do
+                                speed = bouncing_chain.get_arguments(:speed) * 0.7
+                                bouncing_chain.set_arguments(:speed, speed)
+                                bounce = Bounce.new(speed)
+                                bounce.add_callback(CallbackFactory.disappear(drop)) if speed < 1
+                                bounce
+                              end.loop!
+                          end))
           .add_behaviour(CollideWith.new(@bouncing_ball)
             .add_callback(CallbackFactory.disappear(drop)))
       add_spirit(drop)

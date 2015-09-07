@@ -12,6 +12,12 @@ class CallbackFactory
       end
     end
 
+    def next_behaviour_chain(spirit, &block)
+      lambda do
+        spirit.add_behaviour_chain(&block)
+      end
+    end
+
     def next_scene
       lambda { World.next_scene }
     end
