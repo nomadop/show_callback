@@ -1,10 +1,10 @@
 class CallbackWorld
   class << self
     def initialize
-      World.new(caption: "Behaviours Callback Demo")
+      World.new(caption: 'Behaviours Callback Demo')
 
       showcase_scene = ShowcaseScene.new
-      rain_scene = RainScene.new(5000, 10)
+      rain_scene = RainScene.new(7000, 7)
 
       World
           .add_scene(ControlScene)

@@ -9,8 +9,8 @@ module Behaviour
       yield(self) if block_given?
     end
 
-    def set_arguments(key, value)
-      @arguments[key] = value
+    def set_arguments(arguments = {})
+      @arguments.merge!(arguments)
       self
     end
 

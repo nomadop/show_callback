@@ -34,11 +34,12 @@ class BallFactory
     def bouncing_ball_with_a_reduce_rate(center_x, radius, color, init_speed, reduce_rate)
       center_y = World::WORLD_HEIGHT - radius
       bouncing_ball = ball(center_x, center_y, radius, color)
-      bouncing_ball.add_behaviour_chain(speed: init_speed / reduce_rate) do |bouncing_chain|
+      bouncing_ball.add_behaviour_chain do |bouncing_chain|
         bouncing_chain
+            .set_arguments(speed: init_speed / reduce_rate)
             .add_behaviour do
               speed = bouncing_chain.get_arguments(:speed) * reduce_rate
-              bouncing_chain.set_arguments(:speed, speed)
+              bouncing_chain.set_arguments(speed: speed)
               Bounce.new(speed)
             end.loop!
       end
