@@ -5,6 +5,7 @@ module Behaviour
     def initialize
       @callbacks = []
       @active = false
+      yield(self) if block_given?
     end
 
     def update

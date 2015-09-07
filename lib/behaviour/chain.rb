@@ -31,7 +31,7 @@ module Behaviour
 
       last_builder = @behaviour_builders.last
       last_builder.after_build do |behaviour|
-        behaviour.add_callback(CallbackFactory.next_behaviour(@spirit, behaviour_builder))
+        behaviour.add_callback(next_behaviour(@spirit, behaviour_builder))
       end
     end
 

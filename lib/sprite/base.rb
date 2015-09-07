@@ -38,6 +38,7 @@ module Spirit
         behaviour = args[0]
       end
       behaviour.attach_spirit(self)
+      yield(behaviour) if block_given?
       @behaviours << behaviour
       self
     end

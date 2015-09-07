@@ -1,4 +1,16 @@
+require_relative 'factory/callback_factory'
+
 class CallbackWorld
+  Kernel.module_eval do
+    def method_missing(method, *args, &block)
+      if CallbackFactory.respond_to?(method)
+        CallbackFactory.send(method, *args, &block)
+      else
+        super
+      end
+    end
+  end
+
   class << self
     def initialize
       World.new(caption: 'Behaviours Callback Demo')
@@ -81,8 +93,8 @@ class CallbackWorld
             collide_chain
               .add_behaviour do
                 CollideWith.new(next_ball)
-                  .add_callback(CallbackFactory.active_spirit(next_ball))
-                  .add_callback(CallbackFactory.freeze_spirit(ball))
+                  .add_callback(active_spirit(next_ball))
+                  .add_callback(freeze_spirit(ball))
               end
               .add_behaviour { Wait.new(0.1) }
               .loop!

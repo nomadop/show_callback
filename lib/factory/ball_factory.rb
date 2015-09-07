@@ -40,7 +40,9 @@ class BallFactory
             .add_behaviour do
               speed = bouncing_chain.get_arguments(:speed) * reduce_rate
               bouncing_chain.set_arguments(speed: speed)
-              Bounce.new(speed)
+              Bounce.new(speed) do |bounce|
+                bounce.add_callback(freeze_spirit(bouncing_ball)) if speed < 1
+              end
             end.loop!
       end
     end
