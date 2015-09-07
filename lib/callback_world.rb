@@ -4,7 +4,7 @@ class CallbackWorld
       World.new(caption: "Behaviours Callback Demo")
 
       showcase_scene = ShowcaseScene.new
-      rain_scene = RainScene.new(5000, 7)
+      rain_scene = RainScene.new(5000, 10)
 
       World
           .add_scene(ControlScene)
