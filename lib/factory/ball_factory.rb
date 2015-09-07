@@ -53,11 +53,11 @@ class BallFactory
         movement_chain
             .add_behaviour { MoveDown.new(World::WORLD_HEIGHT - padding * 2, speed) }
             .add_behaviour { Wait.new(0.5) }
-            .add_behaviour { MoveRight.new(World::WORLD_WIDTH - padding * 2, speed * 1.6) }
+            .add_behaviour { MoveRight.new(World::WORLD_WIDTH - padding * 2, speed) }
             .add_behaviour { Wait.new(0.5) }
             .add_behaviour { MoveUp.new(World::WORLD_HEIGHT - padding * 2, speed) }
             .add_behaviour { Wait.new(0.5) }
-            .add_behaviour { MoveLeft.new(World::WORLD_WIDTH - padding * 2, speed * 1.6) }
+            .add_behaviour { MoveLeft.new(World::WORLD_WIDTH - padding * 2, speed) }
             .add_behaviour { Wait.new(0.5) }
             .loop!
       end

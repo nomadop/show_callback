@@ -5,7 +5,11 @@ require_all './'
 
 Kernel.module_eval do
   def method_missing(method, *args, &block)
-    CallbackFactory.respond_to?(method) ? CallbackFactory.send(method, *args, &block) : super
+    if CallbackFactory.respond_to?(method) then
+      CallbackFactory.send(method, *args, &block)
+    else
+      super
+    end
   end
 end
 
