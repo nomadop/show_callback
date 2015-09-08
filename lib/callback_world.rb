@@ -106,7 +106,6 @@ class CallbackWorld
                   .add_callback(active_spirit(next_ball))
                   .add_callback(freeze_spirit(ball))
               end
-              .add_behaviour { Wait.new(0.1) }
               .loop!
           end
     end

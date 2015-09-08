@@ -36,6 +36,11 @@ module Behaviour
       @callbacks.clear
     end
 
+    def add_next_behaviour_callback(behaviour)
+      yield(behaviour) if block_given?
+      add_callback(next_behaviour(@spirit, behaviour))
+    end
+
     def to_s
       "Behaviour #{self.class.name}: #{super}"
     end
