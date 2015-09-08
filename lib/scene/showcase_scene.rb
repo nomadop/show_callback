@@ -41,7 +41,7 @@ class ShowcaseScene < Scene::Base
   def draw
     super
     case_name = current_case[:name]
-    World.window.default_font.draw(case_name, 20, 20, 1)
+    World.window.print(case_name, 20, 20, 1)
   end
 
   keybind(Gosu::KbLeft) do

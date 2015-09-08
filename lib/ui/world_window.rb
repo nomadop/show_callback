@@ -37,4 +37,8 @@ class WorldWindow < Gosu::Window
   def circle_image(radius, color)
     Gosu::Image.new(self, Circle.create(radius, color), false)
   end
+
+  def print(text, x, y, z)
+    @default_font.draw(text, x, y, z)
+  end
 end
