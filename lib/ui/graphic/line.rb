@@ -1,14 +1,14 @@
 class Line
   attr_reader :columns, :rows
+  @factory = {}
   class << self
-    @factory = {}
-
     def factory
       @factory
     end
 
-    def create(radius, color)
-      @factory["#{color}#{radius}"] || @factory["#{color}#{radius}"] = new(radius, color)
+    def create(length, width, color)
+      @factory["#{color}:#{length}*#{width}"] ||
+      @factory["#{color}:#{length}*#{width}"] = new(length, width, color)
     end
   end
 

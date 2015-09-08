@@ -1,6 +1,5 @@
 module Behaviour
   class Chain
-    attr_reader :behaviour_builders
 
     def initialize(spirit)
       @spirit = spirit
@@ -52,5 +51,6 @@ module Behaviour
     def first_behaviour
       first_builder.build
     end
+
   end
 end

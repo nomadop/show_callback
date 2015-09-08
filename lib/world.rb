@@ -1,14 +1,6 @@
 class World
   class << self
-    @@world
-
-    def world
-      @@world
-    end
-
-    def world=(world)
-      @@world = world
-    end
+    attr_accessor :world
 
     def new(*args)
       instance = super
