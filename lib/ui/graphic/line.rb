@@ -2,9 +2,7 @@ class Line
   attr_reader :columns, :rows
   @factory = {}
   class << self
-    def factory
-      @factory
-    end
+    attr_reader :factory
 
     def create(length, width, color)
       @factory["#{color}:#{length}*#{width}"] ||
