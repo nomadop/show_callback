@@ -2,20 +2,11 @@ module Behaviour
   class Chain
     attr_reader :behaviour_builders
 
-    def initialize(spirit, arguments = {})
+    def initialize(spirit)
       @spirit = spirit
       @behaviour_builders = []
-      @arguments = arguments
+      @closed = false
       yield(self) if block_given?
-    end
-
-    def set_arguments(arguments = {})
-      @arguments.merge!(arguments)
-      self
-    end
-
-    def get_arguments(key)
-      @arguments.fetch(key)
     end
 
     def add_behaviour(&block)
@@ -44,6 +35,10 @@ module Behaviour
       attach_spirit
     end
 
+    def close?
+      @closed
+    end
+
     private
     def first_builder
       @behaviour_builders.first
@@ -51,6 +46,7 @@ module Behaviour
 
     def attach_spirit
       @spirit.add_behaviour(first_behaviour)
+      @closed = true
     end
 
     def first_behaviour

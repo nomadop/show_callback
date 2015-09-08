@@ -52,8 +52,9 @@ module Spirit
       @behaviours.clear
     end
 
-    def add_behaviour_chain(arguments = {}, &block)
-      Behaviour::Chain.new(self, arguments, &block)
+    def add_behaviour_chain(&block)
+      chain = Behaviour::Chain.new(self, &block)
+      fail 'Behaviour chain is not closed' unless chain.close?
       self
     end
 

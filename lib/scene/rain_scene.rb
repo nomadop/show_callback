@@ -66,4 +66,12 @@ class RainScene < Scene::Base
   def drop_remain?
     @drop_remains > 0
   end
+
+  keybind(Gosu::KbUp) do
+    @ground_y -= 3
+  end
+
+  keybind(Gosu::KbDown) do
+    @ground_y += 3
+  end
 end
