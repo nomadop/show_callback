@@ -39,23 +39,22 @@ class RainScene < Scene::Base
       @drop_remains -= 1
       drop_speed = 10
       drop = BallFactory.drop
-      drop
-          .add_behaviour(MoveDown.new(ground_y, drop_speed)
-            .add_callback(disappear(drop)))
+      drop.add_behaviour(MoveDown.new(ground_y, drop_speed)) do |move_down|
+        move_down.add_callback(disappear(drop))
+      end
       add_spirit(drop)
     end
   end
 
   def create_sun
     sun = BallFactory.sun(center_x: 200, center_y: 150, radius: 150)
-    sun
-        .add_behaviour(Wait.new(2)) do |wait2|
-          wait2.add_callback(next_behaviour(sun, MoveTo.new(-150, -100, 5) do |move_to|
-            move_to.add_callback(next_behaviour(sun, Wait.new(1) do |wait1|
-              wait1.add_callback(lambda { rain_start! })
-            end))
-          end))
-        end
+    sun.add_behaviour(Wait.new(2)) do |wait2|
+      wait2.add_callback(next_behaviour(sun, MoveTo.new(-150, -100, 5) do |move_to|
+        move_to.add_callback(next_behaviour(sun, Wait.new(1) do |wait1|
+          wait1.add_callback(lambda { rain_start! })
+        end))
+      end))
+    end
     add_spirit(sun)
   end
 
