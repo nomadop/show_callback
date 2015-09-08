@@ -20,11 +20,11 @@ class CallbackWorld
     def add_case1(showcase_scene)
       showcase_scene.add_case('Bouncing ball swing left and right') do
         BallFactory.bouncing_ball_swing_left_and_right(
-          100,
-          Ball::DEFAULT_RADIUS,
-          Color::PURPLE,
-          25,
-          10
+            100,
+            Ball::DEFAULT_RADIUS,
+            Color::PURPLE,
+            25,
+            10
         )
       end
     end
@@ -32,32 +32,29 @@ class CallbackWorld
     def add_case2(showcase_scene)
       showcase_scene.add_case('Bouncing balls with reduce rate') do
         init_speed = 35
-        bouncing_ball1 =
-          BallFactory.bouncing_ball_with_a_reduce_rate(
-            280,
-            Ball::DEFAULT_RADIUS,
-            Color::RED,
-            init_speed,
-            0.9
-          )
+        bouncing_ball1 = BallFactory.bouncing_ball_with_a_reduce_rate(
+                             280,
+                             Ball::DEFAULT_RADIUS,
+                             Color::RED,
+                             init_speed,
+                             0.9
+                         )
 
-        bouncing_ball2 =
-          BallFactory.bouncing_ball_with_a_reduce_rate(
-            640,
-            Ball::DEFAULT_RADIUS,
-            Color::YELLOW,
-            init_speed,
-            0.8
-          )
+        bouncing_ball2 = BallFactory.bouncing_ball_with_a_reduce_rate(
+                             640,
+                             Ball::DEFAULT_RADIUS,
+                             Color::YELLOW,
+                             init_speed,
+                             0.8
+                         )
 
-        bouncing_ball3 =
-          BallFactory.bouncing_ball_with_a_reduce_rate(
-            1000,
-            Ball::DEFAULT_RADIUS,
-            Color::BLUE,
-            init_speed,
-            0.7
-          )
+        bouncing_ball3 = BallFactory.bouncing_ball_with_a_reduce_rate(
+                             1000,
+                             Ball::DEFAULT_RADIUS,
+                             Color::BLUE,
+                             init_speed,
+                             0.7
+                         )
 
 
         [bouncing_ball1, bouncing_ball2, bouncing_ball3]
@@ -67,10 +64,10 @@ class CallbackWorld
     def add_case3(showcase_scene)
       showcase_scene.add_case('Ball running in clockwise') do
         BallFactory.ball_running_in_clockwise(
-          150,
-          Ball::DEFAULT_RADIUS,
-          Color::GREEN,
-          15
+            150,
+            Ball::DEFAULT_RADIUS,
+            Color::GREEN,
+            15
         )
       end
     end

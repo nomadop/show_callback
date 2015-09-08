@@ -31,7 +31,12 @@ class RainScene < Scene::Base
   def draw
     super
     World.window.print(@ground_line, 0, ground_y - 24, 1)
-    World.window.print("Drop Remains: #{@drop_remains}", 20, World::WORLD_HEIGHT - 50, 1)
+    World.window.print(
+        "Drop Remains: #{@drop_remains}",
+        20,
+        World::WORLD_HEIGHT - 50,
+        1
+    )
   end
 
   def create_drop
