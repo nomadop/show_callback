@@ -5,8 +5,7 @@ class Line
     attr_reader :factory
 
     def create(length, width, color)
-      @factory["#{color}:#{length}*#{width}"] ||
-      @factory["#{color}:#{length}*#{width}"] = new(length, width, color)
+      @factory["#{color}:#{length}*#{width}"] ||= new(length, width, color)
     end
   end
 

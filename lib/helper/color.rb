@@ -18,7 +18,7 @@ class Color < Struct.new(:red, :green, :blue)
   end
 
   def hex
-    @hex || @hex = {red: format_to_hex(red), green: format_to_hex(green), blue: format_to_hex(blue)}
+    @hex ||= {red: format_to_hex(red), green: format_to_hex(green), blue: format_to_hex(blue)}
   end
 
   def format_to_hex(integer)

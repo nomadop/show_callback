@@ -5,8 +5,7 @@ class Circle
     attr_reader :factory
 
     def create(radius, color)
-      @factory["#{color}#{radius}"] ||
-      @factory["#{color}#{radius}"] = new(radius, color)
+      @factory["#{color}#{radius}"] ||= new(radius, color)
     end
   end
 

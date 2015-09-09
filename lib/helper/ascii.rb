@@ -1,7 +1,9 @@
-class ASCII
+module ASCII
   LIST = File.read('.ascii')
 
-  def self.at(index)
+  module_function
+
+  def at(index)
     LIST[index]
   end
 end
