@@ -7,12 +7,17 @@ class RainScene < Scene::Base
     @drop_remains = rain_remains
     @raining_rate = raining_rate
     @raining_started = false
-    @ground_line = '-' * (World::WORLD_WIDTH / 12)
   end
 
   def start!
     super
     create_sun
+    create_ground_line
+  end
+
+  def create_ground_line
+    line = Line.new(World::WORLD_WIDTH, 1, Color::WHITE)
+    @ground_line = Gosu::Image.new(World.window, line, false)
   end
 
   def rain_start!
@@ -30,7 +35,7 @@ class RainScene < Scene::Base
 
   def draw
     super
-    World.window.print(@ground_line, 0, ground_y - 24, 1)
+    @ground_line.draw(0, @ground_y, 1)
     World.window.print(
         "Drop Remains: #{@drop_remains}",
         20,
@@ -44,7 +49,7 @@ class RainScene < Scene::Base
       @drop_remains -= 1
       drop_speed = 10
       drop = BallFactory.drop
-      drop.add_behaviour(MoveDown.new(ground_y, drop_speed)) do |move_down|
+      drop.add_behaviour(MoveDown.new(ground_y - drop.radius, drop_speed)) do |move_down|
         move_down.add_callback(disappear(drop))
       end
       add_spirit(drop)

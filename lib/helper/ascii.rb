@@ -1,4 +1,4 @@
-class ASCII < String
+class ASCII
   LIST = File.read('.ascii')
 
   def self.at(index)
