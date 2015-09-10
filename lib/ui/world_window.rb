@@ -1,13 +1,18 @@
 class WorldWindow < Gosu::Window
+
   attr_accessor :scene
   attr_reader :default_font
+  attr_reader :circle_image
+  attr_reader :line_image
 
   def initialize(width, height, fullscreen)
     super(width, height, fullscreen)
     @scene = Scene::Base.new
     @keybinds = []
     @last_input_at = Time.at(0)
-    @default_font = Gosu::Font.new(self, Gosu::default_font_name, 48)
+    @default_font = Gosu::Font.new(self, Gosu.default_font_name, 48)
+    @circle_image = Gosu::Image.new(self, Graphic::CIRCLE, false)
+    @line_image = Gosu::Image.new(self, Graphic::LINE, false)
   end
 
   def update
@@ -19,7 +24,7 @@ class WorldWindow < Gosu::Window
 
   def draw
     @scene.draw
-    @default_font.draw("FPS: #{Gosu::fps}", World::WORLD_WIDTH - 200, 20, 1)
+    @default_font.draw("FPS: #{Gosu.fps}", World::WORLD_WIDTH - 200, 20, 1)
   end
 
   def send_input(now)
@@ -32,10 +37,6 @@ class WorldWindow < Gosu::Window
   def register_keybind(key_id)
     @keybinds << key_id
     self
-  end
-
-  def circle_image(radius, color)
-    Gosu::Image.new(self, Circle.create(radius, color), false)
   end
 
   def print(text, x, y, z)

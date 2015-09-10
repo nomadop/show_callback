@@ -6,6 +6,7 @@ module Spirit
     attr_accessor :center_y
     attr_accessor :height
     attr_accessor :width
+    attr_accessor :angle
 
     attr_accessor :image
 
@@ -14,6 +15,7 @@ module Spirit
       @behaviours = []
       @active = true
       @z_index = 0
+      @angle = 0
     end
 
     def update
@@ -60,7 +62,28 @@ module Spirit
     end
 
     def draw
-      @image.draw(upper_left.x, upper_left.y, @z_index, @scale_x, @scale_y, @color)
+      @image.draw_rot(center_x, center_y, @z_index, @angle, 0.5, 0.5, scale_x, scale_y, @color)
+      draw_box if $DEBUG_MODE
+    end
+
+    def draw_box
+      line = World.line_image
+      line.draw_rot(upper_left.x, upper_left.y, @z_index, 90.0, 0.0, 0.0, height.to_f / Graphic::DEFAULT_LENGTH, 1.0 / Graphic::DEFAULT_WEIGHT, Gosu::Color::GREEN)
+      line.draw_rot(upper_right.x, upper_right.y, @z_index, 90.0, 0.0, 0.0, height.to_f / Graphic::DEFAULT_LENGTH, 1.0 / Graphic::DEFAULT_WEIGHT, Gosu::Color::GREEN)
+      line.draw_rot(upper_left.x, upper_left.y, @z_index, 0.0, 0.0, 0.0, width.to_f / Graphic::DEFAULT_LENGTH, 1.0 / Graphic::DEFAULT_WEIGHT, Gosu::Color::GREEN)
+      line.draw_rot(lower_left.x, lower_left.y, @z_index, 0.0, 0.0, 0.0, width.to_f / Graphic::DEFAULT_LENGTH, 1.0 / Graphic::DEFAULT_WEIGHT, Gosu::Color::GREEN)
+    end
+
+    def radians
+      (@angle / 180) * Math::PI
+    end
+
+    def scale_y
+      1
+    end
+
+    def scale_x
+      1
     end
 
     def center
@@ -69,6 +92,18 @@ module Spirit
 
     def upper_left
       Point.new(left_x, top_y)
+    end
+
+    def lower_left
+      Point.new(left_x, bottom_y)
+    end
+
+    def upper_right
+      Point.new(right_x, top_y)
+    end
+
+    def lower_right
+      Point.new(right_x, bottom_y)
     end
 
     def half_height

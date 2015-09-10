@@ -16,8 +16,8 @@ class RainScene < Scene::Base
   end
 
   def create_ground_line
-    line = Line.new(World::WORLD_WIDTH, 1)
-    @ground_line = Gosu::Image.new(World.window, line, false)
+    @ground_line = Line.new(World::WORLD_WIDTH / 2, @ground_y, World::WORLD_WIDTH, 1, Gosu::Color::WHITE)
+    add_spirit(@ground_line)
   end
 
   def rain_start!
@@ -35,7 +35,6 @@ class RainScene < Scene::Base
 
   def draw
     super
-    @ground_line.draw(0, @ground_y, 1)
     World.window.print(
         "Drop Remains: #{@drop_remains}",
         20,
@@ -74,9 +73,11 @@ class RainScene < Scene::Base
 
   keybind(Gosu::KbUp) do
     @ground_y -= 3
+    @ground_line.center_y -= 3
   end
 
   keybind(Gosu::KbDown) do
     @ground_y += 3
+    @ground_line.center_y += 3
   end
 end

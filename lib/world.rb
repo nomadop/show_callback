@@ -59,11 +59,11 @@ class World
     @scene.start!
   end
 
-  def circle_image(radius, color)
-    @window.circle_image(radius, color)
+  def circle_image
+    @window.circle_image
   end
 
-  def create_image(resource)
-    Gosu::Image.new(@window, resource, false)
+  def line_image
+    @window.line_image
   end
 end
