@@ -13,6 +13,7 @@ module Spirit
       @image = image
       @behaviours = []
       @active = true
+      @z_index = 0
     end
 
     def update
@@ -59,7 +60,7 @@ module Spirit
     end
 
     def draw
-      @image.draw(upper_left.x, upper_left.y, 0)
+      @image.draw(upper_left.x, upper_left.y, @z_index, @scale_x, @scale_y, @color)
     end
 
     def center

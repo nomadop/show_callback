@@ -8,11 +8,11 @@ module BallFactory
   def drop(min_radius: 2, max_radius: 5, initial_y: 0)
     center_x = 0.upto(World::WORLD_WIDTH).to_a.sample
     radius = min_radius.upto(max_radius).to_a.sample
-    ball(center_x, initial_y, radius, Color.new(0, 100, 200))
+    ball(center_x, initial_y, radius, Gosu::Color.rgb(0, 100, 200))
   end
 
   def sun(center_x: -150, center_y: -100, radius: 150)
-    ball(center_x, center_y, radius, Color::ORANGE)
+    ball(center_x, center_y, radius, Gosu::Color::YELLOW)
   end
 
   def bouncing_ball_swing_left_and_right(center_x, radius, color, bouncing_speed, swing_speed)

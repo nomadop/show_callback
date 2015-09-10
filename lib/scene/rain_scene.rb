@@ -16,7 +16,7 @@ class RainScene < Scene::Base
   end
 
   def create_ground_line
-    line = Line.new(World::WORLD_WIDTH, 1, Color::WHITE)
+    line = Line.new(World::WORLD_WIDTH, 1)
     @ground_line = Gosu::Image.new(World.window, line, false)
   end
 

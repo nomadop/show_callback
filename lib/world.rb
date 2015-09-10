@@ -62,4 +62,8 @@ class World
   def circle_image(radius, color)
     @window.circle_image(radius, color)
   end
+
+  def create_image(resource)
+    Gosu::Image.new(@window, resource, false)
+  end
 end

@@ -22,7 +22,7 @@ class CallbackWorld
         BallFactory.bouncing_ball_swing_left_and_right(
             100,
             Ball::DEFAULT_RADIUS,
-            Color::PURPLE,
+            Gosu::Color.rgb(255, 0, 255),
             25,
             10
         )
@@ -35,7 +35,7 @@ class CallbackWorld
         bouncing_ball1 = BallFactory.bouncing_ball_with_a_reduce_rate(
                              280,
                              Ball::DEFAULT_RADIUS,
-                             Color::RED,
+                             Gosu::Color::RED,
                              init_speed,
                              0.9
                          )
@@ -43,7 +43,7 @@ class CallbackWorld
         bouncing_ball2 = BallFactory.bouncing_ball_with_a_reduce_rate(
                              640,
                              Ball::DEFAULT_RADIUS,
-                             Color::YELLOW,
+                             Gosu::Color::YELLOW,
                              init_speed,
                              0.8
                          )
@@ -51,7 +51,7 @@ class CallbackWorld
         bouncing_ball3 = BallFactory.bouncing_ball_with_a_reduce_rate(
                              1000,
                              Ball::DEFAULT_RADIUS,
-                             Color::BLUE,
+                             Gosu::Color::BLUE,
                              init_speed,
                              0.7
                          )
@@ -66,7 +66,7 @@ class CallbackWorld
         BallFactory.ball_running_in_clockwise(
             150,
             Ball::DEFAULT_RADIUS,
-            Color::GREEN,
+            Gosu::Color::GREEN,
             15
         )
       end
@@ -76,12 +76,12 @@ class CallbackWorld
       showcase_scene.add_case('Collision between balls') do
         radius = 120
         balls = [
-            BallFactory.ball(200, 200, radius, Color::RED),
-            BallFactory.ball(200, 600, radius, Color::YELLOW),
-            BallFactory.ball(640, 600, radius, Color::GREEN),
-            BallFactory.ball(1080, 600, radius, Color::CYAN),
-            BallFactory.ball(1080, 200, radius, Color::BLUE),
-            BallFactory.ball(640, 200, radius, Color::PURPLE)
+            BallFactory.ball(200, 200, radius, Gosu::Color::RED),
+            BallFactory.ball(200, 600, radius, Gosu::Color::YELLOW),
+            BallFactory.ball(640, 600, radius, Gosu::Color::GREEN),
+            BallFactory.ball(1080, 600, radius, Gosu::Color::CYAN),
+            BallFactory.ball(1080, 200, radius, Gosu::Color::BLUE),
+            BallFactory.ball(640, 200, radius, Gosu::Color.new(255, 0, 255))
         ]
         balls.each(&:freeze!)
 

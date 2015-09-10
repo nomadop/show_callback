@@ -9,7 +9,7 @@ class Line
     end
   end
 
-  def initialize(length, width, color)
+  def initialize(length, width, color = nil)
     @columns = [length - (length & 1), 2].max
     @rows = [width - (width & 1), 1].max
     right_half = "\xff" * (@columns / 2)
@@ -20,7 +20,7 @@ class Line
               lower_half = row * (@rows / 2)
               lower_half.reverse + lower_half
             end
-    @blob.gsub!(/./) { |alpha| "#{color.to_ascii}#{alpha}" }
+    @blob.gsub!(/./) { |alpha| "\xff\xff\xff#{alpha}" }
   end
 
   def to_blob
