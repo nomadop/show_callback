@@ -4,6 +4,7 @@ module Spirit
 
     attr_accessor :center_x
     attr_accessor :center_y
+    attr_accessor :z_index
     attr_accessor :height
     attr_accessor :width
     attr_accessor :angle

@@ -15,8 +15,7 @@ module BallFactory
     ball(center_x, center_y, radius, Gosu::Color::YELLOW)
   end
 
-  def bouncing_ball_swing_left_and_right(center_x, radius, color, bouncing_speed, swing_speed)
-    center_y = World::WORLD_HEIGHT - radius
+  def bouncing_ball_swing_left_and_right(center_x, center_y, radius, color, bouncing_speed, swing_speed)
     bouncing_ball = ball(center_x, center_y, radius, color)
     bouncing_ball.add_behaviour_chain do |bouncing_chain|
       bouncing_chain
@@ -31,8 +30,7 @@ module BallFactory
     end
   end
 
-  def bouncing_ball_with_a_reduce_rate(center_x, radius, color, speed, reduce_rate)
-    center_y = World::WORLD_HEIGHT - radius
+  def bouncing_ball_with_a_reduce_rate(center_x, center_y, radius, color, speed, reduce_rate)
     bouncing_ball = ball(center_x, center_y, radius, color)
     bouncing_ball.add_behaviour_chain do |bouncing_chain|
       bouncing_chain

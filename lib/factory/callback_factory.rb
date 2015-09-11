@@ -2,7 +2,7 @@ module CallbackFactory
   module_function
 
   def disappear(spirit)
-    lambda { World.scene.remove_spirit(spirit) }
+    -> { World.scene.remove_spirit(spirit) }
   end
 
   def next_behaviour(spirit, next_behaviour)
@@ -13,21 +13,15 @@ module CallbackFactory
   end
 
   def next_behaviour_chain(spirit, &block)
-    lambda do
-      spirit.add_behaviour_chain(&block)
-    end
-  end
-
-  def next_scene
-    lambda { World.next_scene }
+    -> { spirit.add_behaviour_chain(&block) }
   end
 
   def active_spirit(spirit)
-    lambda { spirit.active! }
+    -> { spirit.active! }
   end
 
   def freeze_spirit(spirit)
-    lambda { spirit.freeze! }
+    -> { spirit.freeze! }
   end
 
 end

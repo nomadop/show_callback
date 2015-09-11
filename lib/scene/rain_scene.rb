@@ -1,5 +1,4 @@
 class RainScene < Scene::Base
-  attr_accessor :ground_y
 
   def initialize(rain_remains, raining_rate, ground_height = 100)
     super()
@@ -17,6 +16,7 @@ class RainScene < Scene::Base
 
   def create_ground_line
     @ground_line = Line.new(World::WORLD_WIDTH / 2, @ground_y, World::WORLD_WIDTH, 1, Gosu::Color::WHITE)
+    @ground_line.z_index = 1
     add_spirit(@ground_line)
   end
 
@@ -48,7 +48,7 @@ class RainScene < Scene::Base
       @drop_remains -= 1
       drop_speed = 10
       drop = BallFactory.drop
-      drop.add_behaviour(MoveDown.new(ground_y - drop.radius, drop_speed)) do |move_down|
+      drop.add_behaviour(MoveDown.new(@ground_y - drop.radius, drop_speed)) do |move_down|
         move_down.add_callback(disappear(drop))
       end
       add_spirit(drop)
@@ -60,7 +60,7 @@ class RainScene < Scene::Base
     sun.add_behaviour(Wait.new(2)) do |wait2|
       wait2.add_callback(next_behaviour(sun, MoveTo.new(-150, -100, 5) do |move_to|
         move_to.add_callback(next_behaviour(sun, Wait.new(1) do |wait1|
-          wait1.add_callback(lambda { rain_start! })
+          wait1.add_callback(->{ rain_start! })
         end))
       end))
     end

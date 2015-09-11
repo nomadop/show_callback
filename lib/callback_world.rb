@@ -21,6 +21,7 @@ class CallbackWorld
       showcase_scene.add_case('Bouncing ball swing left and right') do
         BallFactory.bouncing_ball_swing_left_and_right(
             100,
+            World::WORLD_HEIGHT - Ball::DEFAULT_RADIUS,
             Ball::DEFAULT_RADIUS,
             Gosu::Color.rgb(255, 0, 255),
             25,
@@ -32,8 +33,10 @@ class CallbackWorld
     def add_case2(showcase_scene)
       showcase_scene.add_case('Bouncing balls with reduce rate') do
         init_speed = 35
+        center_y = World::WORLD_HEIGHT - Ball::DEFAULT_RADIUS
         bouncing_ball1 = BallFactory.bouncing_ball_with_a_reduce_rate(
                              280,
+                             center_y,
                              Ball::DEFAULT_RADIUS,
                              Gosu::Color::RED,
                              init_speed,
@@ -42,6 +45,7 @@ class CallbackWorld
 
         bouncing_ball2 = BallFactory.bouncing_ball_with_a_reduce_rate(
                              640,
+                             center_y,
                              Ball::DEFAULT_RADIUS,
                              Gosu::Color::YELLOW,
                              init_speed,
@@ -50,6 +54,7 @@ class CallbackWorld
 
         bouncing_ball3 = BallFactory.bouncing_ball_with_a_reduce_rate(
                              1000,
+                             center_y,
                              Ball::DEFAULT_RADIUS,
                              Gosu::Color::BLUE,
                              init_speed,

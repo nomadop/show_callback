@@ -5,17 +5,21 @@ class Bounce < Behaviour::Base
     @acc = 1
   end
 
+  def attach_spirit(spirit)
+    super
+    @start_y = spirit.center_y
+  end
+
   def update
     @speed += @acc
     @spirit.center_y += move
   end
 
   def move
-    [@speed, World::WORLD_HEIGHT - @spirit.half_height - @spirit.center_y].min
+    [@speed, @start_y - @spirit.center_y].min
   end
 
   def finish?
-    @spirit.center_y + @spirit.half_height >=
-        (World.scene.respond_to?(:ground_y) ? World.scene.ground_y : World::WORLD_HEIGHT)
+    @spirit.center_y >= @start_y
   end
 end

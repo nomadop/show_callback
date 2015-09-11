@@ -4,7 +4,7 @@ class SimpleMovement < Behaviour::Base
   def initialize(distance, speed)
     super()
     @speed = speed
-    @distance = distance
+    @distance = distance || 0
     @moved = 0
   end
 
@@ -13,6 +13,6 @@ class SimpleMovement < Behaviour::Base
   end
 
   def finish?
-    @moved >= @distance
+    @distance > 0 ? @moved >= @distance : false
   end
 end
