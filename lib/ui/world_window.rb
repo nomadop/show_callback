@@ -25,6 +25,7 @@ class WorldWindow < Gosu::Window
   def draw
     @scene.draw
     @default_font.draw("FPS: #{Gosu.fps}", World::WORLD_WIDTH - 200, 20, 1)
+    @circle_image.draw(mouse_x * 2, mouse_y * 2, 1, 0.01, 0.01, Gosu::Color::GREEN)
   end
 
   def send_input(now)

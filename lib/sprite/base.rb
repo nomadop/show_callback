@@ -15,7 +15,7 @@ module Spirit
       @behaviours = []
       @active = true
       @z_index = 0
-      @angle = 0
+      @angle = 0.0
     end
 
     def update
@@ -72,6 +72,10 @@ module Spirit
       line.draw_rot(upper_right.x, upper_right.y, @z_index, 90.0, 0.0, 0.0, height.to_f / Graphic::DEFAULT_LENGTH, 1.0 / Graphic::DEFAULT_WEIGHT, Gosu::Color::GREEN)
       line.draw_rot(upper_left.x, upper_left.y, @z_index, 0.0, 0.0, 0.0, width.to_f / Graphic::DEFAULT_LENGTH, 1.0 / Graphic::DEFAULT_WEIGHT, Gosu::Color::GREEN)
       line.draw_rot(lower_left.x, lower_left.y, @z_index, 0.0, 0.0, 0.0, width.to_f / Graphic::DEFAULT_LENGTH, 1.0 / Graphic::DEFAULT_WEIGHT, Gosu::Color::GREEN)
+    end
+
+    def angle=(other)
+      @angle = other.modulo(360.0)
     end
 
     def radians

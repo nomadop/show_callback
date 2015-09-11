@@ -27,12 +27,8 @@ module Graphic
           self.rows = DEFAULT_WEIGHT
           right_half = "\xff" * (columns / 2)
           row = "#{right_half.reverse}#{right_half}"
-          blob = if rows == 1
-                    row
-                  else
-                    lower_half = row * (rows / 2)
-                    lower_half.reverse + lower_half
-                  end
+          lower_half = row * (rows / 2)
+          blob = lower_half.reverse + lower_half
           blob.gsub!(/./) { |alpha| "\xff\xff\xff#{alpha}" }
         end
   end

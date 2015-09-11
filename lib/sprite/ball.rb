@@ -5,8 +5,8 @@ class Ball < Spirit::Base
 
   def initialize(center_x, center_y, radius, color)
     super(World.circle_image)
-    @center_x = center_x
-    @center_y = center_y
+    @center_x = center_x.to_f
+    @center_y = center_y.to_f
     @color = color
     @radius = radius.to_f
   end

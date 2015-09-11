@@ -8,24 +8,20 @@ class Line < Spirit::Base
     @weight = weight.to_f
     @color = color
     @angle = angle.to_f
-    @center_x = center_x
-    @center_y = center_y
+    @center_x = center_x.to_f
+    @center_y = center_y.to_f
   end
 
   def head
-    if @angle.modulo(360.0).between?(0.0, 90.0) || @angle.modulo(360.0).between?(180.0, 270.0)
-      upper_left
-    else
-      lower_left
-    end
+    backslash? ? upper_left : lower_left
   end
 
   def tail
-    if @angle.modulo(360.0).between?(0.0, 90.0) || @angle.modulo(360.0).between?(180.0, 270.0)
-      lower_right
-    else
-      upper_right
-    end
+    backslash? ? lower_right : upper_right
+  end
+
+  def backslash?
+    @angle.between?(0.0, 90.0) || @angle.between?(180.0, 270.0)
   end
 
   def draw
