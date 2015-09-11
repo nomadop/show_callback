@@ -104,11 +104,14 @@ class CallbackWorld
 
     def initialize_balls_in_case4(ball, next_ball, movement)
       ball.add_behaviour(movement)
-          .add_behaviour(CollideWith.new(next_ball)) do |collide|
-            collide.action do
-              next_ball.active!
-              ball.freeze!
-            end
+          .add_behaviour_chain do |collide_chain|
+            collide_chain
+              .add_behaviour do
+                CollideWith.new(next_ball)
+                  .add_callback(active_spirit(next_ball))
+                  .add_callback(freeze_spirit(ball))
+              end
+              .loop!
           end
     end
   end
