@@ -4,6 +4,7 @@ class ControlScene < Scene::Base
     @control_spirit =
         BallFactory.ball(World::WORLD_WIDTH / 2, World::WORLD_HEIGHT / 2, 100, Gosu::Color::WHITE)
     @control_spirit.extend(GoStraight)
+    # @control_spirit.extend(GoStep)
     add_spirit(@control_spirit)
   end
 
