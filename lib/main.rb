@@ -13,6 +13,8 @@ Kernel.module_eval do
   end
 end
 
+$DEBUG_MODE = false
+
 CallbackWorld.initialize
 
 begin
