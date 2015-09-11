@@ -1,10 +1,19 @@
 class CollideWith < Behaviour::Base
-  def initialize(spirit)
+  def initialize(target, &block)
+    @target = target
+    @action = block
     super()
-    @other_spirit = spirit
   end
 
-  def finish?
-    @spirit.collide?(@other_spirit)
+  def action(&block)
+    @action = block
+  end
+
+  def update
+    @action.call if collide?
+  end
+
+  def collide?
+    @spirit.collide?(@target)
   end
 end
