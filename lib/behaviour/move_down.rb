@@ -16,4 +16,5 @@ class MoveDown < SimpleMovement
   def finish?
     super || @spirit.center_y + @spirit.half_height >= World::WORLD_HEIGHT
   end
+
 end

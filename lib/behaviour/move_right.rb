@@ -1,5 +1,4 @@
 class MoveRight < SimpleMovement
-  DEFAULT_SPEED = 5
 
   def initialize(distance = World::WORLD_WIDTH, speed = DEFAULT_SPEED)
     super
@@ -17,4 +16,5 @@ class MoveRight < SimpleMovement
   def finish?
     super || @spirit.center_x + @spirit.half_width >= World::WORLD_WIDTH
   end
+
 end
