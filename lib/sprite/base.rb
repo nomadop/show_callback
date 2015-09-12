@@ -20,12 +20,7 @@ module Spirit
     end
 
     def update
-      @behaviours.each do |behaviour|
-        next if behaviour.freeze?
-
-        behaviour.update
-        behaviour.callback if behaviour.finish?
-      end
+      @behaviours.select(&:active?).each(&:update)
 
       @behaviours.delete_if { |behaviour| behaviour.active? && behaviour.finish? && !behaviour.persistent? }
       active_all_behaviours

@@ -8,7 +8,7 @@ class SimpleMovement < Behaviour::Base
     @moved = 0
   end
 
-  def update
+  def action
     @moved += move
   end
 

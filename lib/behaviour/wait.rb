@@ -4,7 +4,7 @@ class Wait < Behaviour::Base
     @timeout = timeout
   end
 
-  def update
+  def action
     @first_call_at ||= Time.now
   end
 

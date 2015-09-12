@@ -17,7 +17,12 @@ module Behaviour
       @persistent
     end
 
-    def update; end
+    def update
+      action
+      callback if finish?
+    end
+
+    def action; end
 
     def attach_spirit(spirit)
       @spirit = spirit

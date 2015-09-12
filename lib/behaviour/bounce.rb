@@ -10,7 +10,7 @@ class Bounce < Behaviour::Base
     @start_y = spirit.center_y
   end
 
-  def update
+  def action
     @speed += @acc
     @spirit.center_y += move
   end

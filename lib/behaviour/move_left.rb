@@ -4,7 +4,7 @@ class MoveLeft < SimpleMovement
     super
   end
 
-  def update
+  def action
     super
     @spirit.center_x -= move
   end

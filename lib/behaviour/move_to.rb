@@ -6,7 +6,7 @@ class MoveTo < Behaviour::Base
     @speed = speed
   end
 
-  def update
+  def action
     @spirit.center_x += move_x
     @spirit.center_y += move_y
   end
