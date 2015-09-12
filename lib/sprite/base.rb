@@ -22,7 +22,7 @@ module Spirit
     def update
       @behaviours.select(&:active?).each(&:update)
 
-      @behaviours.delete_if { |behaviour| behaviour.active? && behaviour.finish? && !behaviour.persistent? }
+      @behaviours.delete_if { |behaviour| behaviour.active? && behaviour.finish? }
       active_all_behaviours
     end
 

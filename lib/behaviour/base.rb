@@ -5,16 +5,11 @@ module Behaviour
     def initialize
       @callbacks = []
       @active = false
-      @persistent = false
       yield(self) if block_given?
     end
 
     def finish?
       false
-    end
-
-    def persistent?
-      @persistent
     end
 
     def update
