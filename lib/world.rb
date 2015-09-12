@@ -66,4 +66,8 @@ class World
   def line_image
     @window.line_image
   end
+
+  def mouse
+    Point.new(@window.mouse_x * 2, @window.mouse_y * 2)
+  end
 end
