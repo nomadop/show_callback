@@ -43,7 +43,7 @@ class Line < Spirit::Base
   end
 
   def width
-    (@length * Math.cos(radians)).abs
+    (@length * Math.cos(radian)).abs
   end
 
   def width=(_)
@@ -51,7 +51,7 @@ class Line < Spirit::Base
   end
 
   def height
-    (@length * Math.sin(radians)).abs
+    (@length * Math.sin(radian)).abs
   end
 
   def height=(_)

@@ -74,7 +74,7 @@ module Spirit
       @angle = other.modulo(360.0)
     end
 
-    def radians
+    def radian
       (@angle / 180) * Math::PI
     end
 

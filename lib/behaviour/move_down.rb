@@ -10,7 +10,7 @@ class MoveDown < SimpleMovement
   end
 
   def move
-    [@speed, World::WORLD_HEIGHT - @spirit.half_height - @spirit.center_y].min
+    [@speed, @distance - @moved, World::WORLD_HEIGHT - @spirit.half_height - @spirit.center_y].min
   end
 
   def finish?
