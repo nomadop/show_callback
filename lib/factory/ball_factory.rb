@@ -6,8 +6,8 @@ module BallFactory
   end
 
   def drop(min_radius: 2, max_radius: 5, initial_y: 0)
-    center_x = 0.upto(World::WORLD_WIDTH).to_a.sample
-    radius = min_radius.upto(max_radius).to_a.sample
+    center_x = Gosu.random(0, World::WORLD_WIDTH)
+    radius = Gosu.random(min_radius, max_radius)
     ball(center_x, initial_y, radius, Gosu::Color.rgb(0, 100, 200))
   end
 
