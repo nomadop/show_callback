@@ -26,10 +26,12 @@ class Line < Spirit::Base
 
   def draw
     super
-    circle = World.circle_image
-    scale = @weight / Graphic::DEFAULT_RADIUS / 2
-    circle.draw_rot(head.x, head.y, @z_index, 0.0, 0.5, 0.5, scale, scale, @color)
-    circle.draw_rot(tail.x, tail.y, @z_index, 0.0, 0.5, 0.5, scale, scale, @color)
+    if @weight > 3
+      circle = World.circle_image
+      scale = @weight / Graphic::DEFAULT_RADIUS / 2
+      circle.draw_rot(head.x, head.y, @z_index, 0.0, 0.5, 0.5, scale, scale, @color)
+      circle.draw_rot(tail.x, tail.y, @z_index, 0.0, 0.5, 0.5, scale, scale, @color)
+    end
   end
 
   def scale_x

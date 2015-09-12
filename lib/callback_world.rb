@@ -86,7 +86,7 @@ class CallbackWorld
             BallFactory.ball(640, 600, radius, Gosu::Color::GREEN),
             BallFactory.ball(1080, 600, radius, Gosu::Color::CYAN),
             BallFactory.ball(1080, 200, radius, Gosu::Color::BLUE),
-            BallFactory.ball(640, 200, radius, Gosu::Color.new(255, 0, 255))
+            BallFactory.ball(640, 200, radius, Gosu::Color.rgb(255, 0, 255))
         ]
         balls.each(&:freeze!)
 
@@ -104,14 +104,10 @@ class CallbackWorld
 
     def initialize_balls_in_case4(ball, next_ball, movement)
       ball.add_behaviour(movement)
-          .add_behaviour_chain do |collide_chain|
-            collide_chain
-              .add_behaviour do
-                CollideWith.new(next_ball)
-                  .add_callback(active_spirit(next_ball))
-                  .add_callback(freeze_spirit(ball))
-              end
-              .loop!
+          .add_behaviour(CollideWith.new(next_ball)) do |collide|
+            collide
+              .add_callback(active_spirit(next_ball))
+              .add_callback(freeze_spirit(ball))
           end
     end
   end

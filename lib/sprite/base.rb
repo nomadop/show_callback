@@ -27,7 +27,7 @@ module Spirit
         behaviour.callback if behaviour.finish?
       end
 
-      @behaviours.delete_if { |behaviour| behaviour.active? && behaviour.finish? }
+      @behaviours.delete_if { |behaviour| behaviour.active? && behaviour.finish? && !behaviour.persistent? }
       active_all_behaviours
     end
 

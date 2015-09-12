@@ -5,16 +5,19 @@ module Behaviour
     def initialize
       @callbacks = []
       @active = false
+      @persistent = false
       yield(self) if block_given?
-    end
-
-    def update
-      return if finish?
     end
 
     def finish?
       false
     end
+
+    def persistent?
+      @persistent
+    end
+
+    def update; end
 
     def attach_spirit(spirit)
       @spirit = spirit
@@ -25,15 +28,8 @@ module Behaviour
       self
     end
 
-    def remove_callback(callback)
-      @callbacks.delete(callback)
-      self
-    end
-
     def callback
       @callbacks.each(&:call)
-
-      @callbacks.clear
     end
 
     def to_s
