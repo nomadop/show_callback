@@ -7,14 +7,12 @@ class CallbackWorld
       rain_scene = RainScene.new(7000, 7)
 
       World
-          .add_scene(ControlScene)
           .add_scene(rain_scene)
           .add_scene(showcase_scene)
 
       add_case1(showcase_scene)
       add_case2(showcase_scene)
       add_case3(showcase_scene)
-      add_case4(showcase_scene)
     end
 
     def add_case1(showcase_scene)
@@ -67,17 +65,6 @@ class CallbackWorld
     end
 
     def add_case3(showcase_scene)
-      showcase_scene.add_case('Ball running in clockwise') do
-        BallFactory.ball_running_in_clockwise(
-            150,
-            Ball::DEFAULT_RADIUS,
-            Gosu::Color::GREEN,
-            15
-        )
-      end
-    end
-
-    def add_case4(showcase_scene)
       showcase_scene.add_case('Collision between balls') do
         radius = 120
         balls = [
@@ -90,19 +77,19 @@ class CallbackWorld
         ]
         balls.each(&:freeze!)
 
-        initialize_balls_in_case4(balls[0], balls[1], MoveDown)
-        initialize_balls_in_case4(balls[1], balls[2], MoveRight)
-        initialize_balls_in_case4(balls[2], balls[3], MoveRight)
-        initialize_balls_in_case4(balls[3], balls[4], MoveUp)
-        initialize_balls_in_case4(balls[4], balls[5], MoveLeft)
-        initialize_balls_in_case4(balls[5], balls[0], MoveLeft)
+        initialize_balls_in_case3(balls[0], balls[1], MoveDown)
+        initialize_balls_in_case3(balls[1], balls[2], MoveRight)
+        initialize_balls_in_case3(balls[2], balls[3], MoveRight)
+        initialize_balls_in_case3(balls[3], balls[4], MoveUp)
+        initialize_balls_in_case3(balls[4], balls[5], MoveLeft)
+        initialize_balls_in_case3(balls[5], balls[0], MoveLeft)
         balls[0].active!
 
         balls
       end
     end
 
-    def initialize_balls_in_case4(ball, next_ball, movement)
+    def initialize_balls_in_case3(ball, next_ball, movement)
       ball.add_behaviour(movement)
           .add_behaviour(CollideWith.new(next_ball)) do |collide|
             collide
